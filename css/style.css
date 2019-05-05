@@ -2256,7 +2256,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 /*=============== prototype_banner_area css ==============*/
 .prototype_banner_area {
   background: #fbfbfd;
-  padding-top: 220px;
+  padding-top: 100px;
   position: relative;
   z-index: 0;
   overflow: hidden;
@@ -3351,6 +3351,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
   display: inline-block;
   padding: 7px 16px;
   margin: 35px 0px 45px;
+    border-radius: 8px;
 }
 
 .p_feature_item .prototype_content .prototype_logo a {
@@ -4309,7 +4310,7 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .prototype_service_area {
   background: #fbfbfd;
   padding-bottom: 130px;
-  padding-top: 20px;
+  padding-top: 80px;
 }
 
 .service_carousel {
@@ -4348,6 +4349,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 .service_carousel .owl-item .service_item {
   -webkit-box-shadow: 0px 30px 40px 0px rgba(12, 0, 46, 0.1);
   box-shadow: 0px 30px 40px 0px rgba(12, 0, 46, 0.1);
+    border-radius: 8px;
+    text-align: center
 }
 
 .service_carousel .owl-item .service_item:hover {
@@ -4355,7 +4358,8 @@ a:hover, a:focus, .btn:hover, .btn:focus, button:hover, button:focus {
 }
 
 .service_carousel .owl-item .service_item img {
-  width: auto;
+  width: 100%;
+    margin: 0 auto
 }
 
 .service_carousel .owl-next {
