@@ -65,6 +65,11 @@ custom
     -moz-box-shadow: 0px 0px 0px 4px rgba(239,242,249,0.73);
     box-shadow: 0px 0px 0px 4px rgba(239,242,249,0.73);
 }
+.no-shadow{
+     -webkit-box-shadow:none!important;
+    -moz-box-shadow:none!important;
+    box-shadow:none!important;
+}
 .nav-tabs .nav-link:any-link{
     border: 1px solid transparent;
 }
