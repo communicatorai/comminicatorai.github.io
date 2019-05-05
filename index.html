@@ -19,6 +19,13 @@
     <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
+     <style>
+    /* Make the image fully responsive */
+        .carousel-inner img {
+            width: 100%;
+            height: 100%;
+         }
+    </style>
 </head>
 
 <body>
@@ -62,35 +69,86 @@
     </div>
   </nav>
 </header>
+
 <section class="software_banner_area d-flex align-items-center">
   <div class="container">
-    <div class="row">
-      <div class="col-lg-6 d-flex align-items-center">
-        <div class="software_banner_content">
-          <h2 class="f_500 f_size_50 w_color wow fadeInLeft" data-wow-delay="0.2s">
-            Empower your organization with <span class="f_700">growing information</span>
-          </h2>
-          <!-- !Content -->
-          <p class="w_color f_size_18 l_height30 mt_30 wow fadeInLeft" data-wow-delay="0.4s">
-              Lorem ipsum dolor sit amet, quando graeco ex mel. Epicurei delicatissimi vix ea. Nam aliquid admodum suavitate ut
-          </p>
-          <div class="action_btn d-flex align-items-center mt_40 wow fadeInLeft" data-wow-delay="0.6s">
-            <a href="#" class="software_banner_btn">Get Demo</a>
-            <a href="!content" class="video_btn popup-youtube">
-              <div class="icon"><i class="ti-control-play"></i></div>
-              <span>Watch Video</span>
-            </a>
+  <div id="carousel-main" class="carousel slide" data-ride="carousel">
+          <!-- Indicators -->
+          <ul class="carousel-indicators">
+            <li data-target="#carousel-main" data-slide-to="0" class="active"></li>
+            <li data-target="#carousel-main" data-slide-to="1"></li>
+          </ul>
+
+          <!-- The slideshow -->
+          <div class="carousel-inner carousel-showall">
+            <div class="carousel-item active ">
+                <div class="row">
+                  <div class="col-lg-6 d-flex align-items-center">
+                    <div class="software_banner_content">
+                      <h2 class="f_500 f_size_50 w_color wow fadeInLeft" data-wow-delay="0.2s">
+                        Empower your organization with <span class="f_700">growing information</span>
+                      </h2>
+                      <!-- !Content -->
+                      <p class="w_color f_size_18 l_height30 mt_30 wow fadeInLeft" data-wow-delay="0.4s">
+                          Lorem ipsum dolor sit amet, quando graeco ex mel. Epicurei delicatissimi vix ea. Nam aliquid admodum suavitate ut
+                      </p>
+                      <div class="action_btn d-flex align-items-center mt_40 wow fadeInLeft" data-wow-delay="0.6s">
+                        <a href="#" class="software_banner_btn">Get Demo</a>
+                        <a href="!content" class="video_btn popup-youtube">
+                          <div class="icon"><i class="ti-control-play"></i></div>
+                          <span>Watch Video</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="software_img wow fadeInRight" data-wow-delay="0.2s">
+                      <img src="img/graphics/banner_img.png" alt="">
+                    </div>
+                  </div>
+                </div> 
+            </div>
+            <div class="carousel-item">
+                <div class="row">
+                  <div class="col-lg-6 d-flex align-items-center">
+                    <div class="software_banner_content">
+                      <h2 class="f_500 f_size_50 w_color wow fadeInLeft" data-wow-delay="0.2s">
+                        Empower your organization with <span class="f_700">growing information</span>
+                      </h2>
+                      <!-- !Content -->
+                      <p class="w_color f_size_18 l_height30 mt_30 wow fadeInLeft" data-wow-delay="0.4s">
+                          Lorem ipsum dolor sit amet, quando graeco ex mel. Epicurei delicatissimi vix ea. Nam aliquid admodum suavitate ut
+                      </p>
+                      <div class="action_btn d-flex align-items-center mt_40 wow fadeInLeft" data-wow-delay="0.6s">
+                        <a href="#" class="software_banner_btn">Get Demo</a>
+                        <a href="!content" class="video_btn popup-youtube">
+                          <div class="icon"><i class="ti-control-play"></i></div>
+                          <span>Watch Video</span>
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-lg-6">
+                    <div class="software_img wow fadeInRight" data-wow-delay="0.2s">
+                      <img src="img/graphics/banner_img.png" alt="">
+                    </div>
+                  </div>
+                </div>      
+            </div>
           </div>
+
+          <!-- Left and right controls -->
+          <a class="carousel-control-prev" href="#carousel-main" data-slide="prev"></a>
+          <a class="carousel-control-next" href="#carousel-main" data-slide="next"></a>
         </div>
-      </div>
-      <div class="col-lg-6">
-        <div class="software_img wow fadeInRight" data-wow-delay="0.2s">
-          <img src="img/graphics/banner_img.png" alt="">
-        </div>
-      </div>
     </div>
-  </div>
 </section>
+ 
+
+   
+    
+    
+    
 <section class="software_featured_area">
   <div class="container">
     <div class="sec_title text-center mb_70 wow fadeInUp" data-wow-delay="0.2s">
@@ -360,6 +418,9 @@
     </div>
   </div>
 </footer>
+    
+
+    
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
     <script src="js/jquery-3.2.1.min.js"></script>
