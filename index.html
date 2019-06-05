@@ -26,9 +26,68 @@
             height: 100%;
          }
     </style>
+    <script type="text/javascript">
+    $('#contactModal').on('shown.bs.modal', function () {
+      $('#myInput').trigger('focus')
+    })
+    </script>
 </head>
 
 <body>
+
+
+  <!-- Modal -->
+  <div class="modal fade" id="contactModal" tabindex="-1" role="dialog" aria-labelledby="contactModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="contactModalLabel">Contact Us</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+
+          <div class="row">
+
+            <div class="col-lg-12">
+                <div class="contact_form">
+                    <form action="contact_process.php" class="contact_form_box" method="post" id="contactForm" novalidate="novalidate">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group text_box">
+                                     <input type="text" id="name" name="name" placeholder="Your Name">
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <div class="form-group text_box">
+                                    <input type="text" name="email" id="email" placeholder="Your Email">
+                                </div>
+                            </div>
+                            <!-- <div class="col-lg-12">
+                                <div class="form-group text_box">
+                                    <input type="text" id="subject" name="subject" placeholder="Subject">
+                                </div>
+                            </div> -->
+                            <div class="col-lg-12">
+                                <div class="form-group text_box">
+                                    <textarea name="message" id="message" cols="30" rows="10" placeholder="Modules Interested"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="submit" class="btn_three">Send Message</button>
+                    </form>
+                </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
 <header class="header_area">
   <nav class="navbar navbar-expand-lg menu_one menu_five">
     <div class="container">
@@ -65,7 +124,9 @@
           </li>
         </ul>
       </div>
-      <a class="btn_get btn_get_radious hidden-sm hidden-xs" href="#get-app">Request demo</a>
+
+      <!-- Button trigger modal -->
+      <a class="btn_get btn_get_radious hidden-sm hidden-xs" href="#get-app" data-toggle="modal" data-target="#contactModal">Request demo</a>
     </div>
   </nav>
 </header>
@@ -89,9 +150,9 @@
                         Empower your organization with <span class="f_700">growing information</span>
                       </h2>
                       <!-- !Content -->
-                      <p class="w_color f_size_18 l_height30 mt_30 wow fadeInLeft" data-wow-delay="0.4s">
+                      <!--<p class="w_color f_size_18 l_height30 mt_30 wow fadeInLeft" data-wow-delay="0.4s">
                           Lorem ipsum dolor sit amet, quando graeco ex mel. Epicurei delicatissimi vix ea. Nam aliquid admodum suavitate ut
-                      </p>
+                      </p>-->
                       <div class="action_btn d-flex align-items-center mt_40 wow fadeInLeft" data-wow-delay="0.6s">
                         <a href="#" class="software_banner_btn">Get Demo</a>
                         <a href="!content" class="video_btn popup-youtube">
@@ -260,7 +321,7 @@
                         <h2 class="f_p f_size_30 f_700 t_color3 l_height45 pr_70 mb-30">For employees </h2>
                         <h3>Answers for any teams.</h3>
                         <p class="f_300">Let your different departments in your organization to seek pieces of information on the fly</p>
-                        <a href="#" class="learn_btn_two">See All Featureds <i class="ti-arrow-right"></i></a>
+                        <a href="#" class="learn_btn_two">See All Features <i class="ti-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -275,7 +336,7 @@
                         <h2 class="f_p f_size_30 f_700 t_color3 l_height45 mb-30">For customers </h2>
                         <h3>Answer your customers </h3>
                         <p class="f_300">Let your knowledge about your product and services available to your customers in a far intelligent way. </p>
-                        <a href="#" class="learn_btn_two">See All Featureds <i class="ti-arrow-right"></i></a>
+                        <a href="#" class="learn_btn_two">See All Features <i class="ti-arrow-right"></i></a>
                     </div>
                 </div>
             </div>
@@ -296,25 +357,25 @@
           <li class="nav-item wow fadeInUp" data-wow-delay="0.4s" style="visibility: visible; animation-delay: 0.4s; animation-name: fadeInUp;">
             <a class="nav-link active show" id="one-tab" data-toggle="tab" href="#one" role="tab" aria-controls="one" aria-selected="true">
               <h5>Human resource</h5>
-              <p>te qui dicta mandamus reprimique</p>
+              <!--<p>te qui dicta mandamus reprimique</p>-->
             </a>
           </li>
           <li class="nav-item wow fadeInUp" data-wow-delay="0.6s" style="visibility: visible; animation-delay: 0.6s; animation-name: fadeInUp;">
             <a class="nav-link" id="two-tab" data-toggle="tab" href="#two" role="tab" aria-controls="two" aria-selected="false">
               <h5>Legal</h5>
-              <p>te qui dicta mandamus reprimique</p>
+              <!--<p>te qui dicta mandamus reprimique</p>-->
             </a>
           </li>
           <li class="nav-item wow fadeInUp" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
             <a class="nav-link" id="four-tab" data-toggle="tab" href="#three" role="tab" aria-controls="four" aria-selected="false">
               <h5>Sales & Ops</h5>
-              <p>te qui dicta mandamus reprimique</p>
+              <!--<p>te qui dicta mandamus reprimique</p>-->
             </a>
           </li>
           <li class="nav-item wow fadeInUp" data-wow-delay="0.8s" style="visibility: visible; animation-delay: 0.8s; animation-name: fadeInUp;">
             <a class="nav-link" id="four-tab" data-toggle="tab" href="#four" role="tab" aria-controls="four" aria-selected="false">
               <h5>Supply Chain </h5>
-              <p>te qui dicta mandamus reprimique</p>
+              <!--<p>te qui dicta mandamus reprimique</p>-->
             </a>
           </li>
         </ul>
