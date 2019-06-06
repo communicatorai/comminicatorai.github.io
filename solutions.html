@@ -44,7 +44,7 @@ $('#contactModal').on('shown.bs.modal', function () {
 
             <div class="col-lg-12">
                 <div class="contact_form">
-                    <form action="contact_process.php" class="contact_form_box" method="post" id="contactForm" novalidate="novalidate">
+                    <form action="https://formspree.io/deepesh@communicator.ai" name="input" class="contact_form_box" method="POST" id="contactForm" novalidate="novalidate">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group text_box">
@@ -67,6 +67,8 @@ $('#contactModal').on('shown.bs.modal', function () {
                                 </div>
                             </div>
                         </div>
+			<input type="hidden" name="_subject" value="Lead from communicator.ai[solutions]" />
+			<input type="hidden" name="_next" value="thanks.html" />
                         <button type="submit" class="btn_three">Send Message</button>
                     </form>
                 </div>
