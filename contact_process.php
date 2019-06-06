@@ -1,6 +1,6 @@
 <?php
 
-    $to = "inova.theme@gmail.com";
+    $to = "test@mail.com";
     $from = $_REQUEST['email'];
     $name = $_REQUEST['name'];
     $name2 = $_REQUEST['name2'];
@@ -13,12 +13,12 @@
 	$headers .= "MIME-Version: 1.0\r\n";
 	$headers .= "Content-Type: text/html; charset=ISO-8859-1\r\n";
 
-    $subject = "You have a message from your Saasland.";
+    $subject = "You have a message.";
 
     $logo = '';
     $link = '#';
 
-	$body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Bixcoin Master Mail</title></head><body>";
+	$body = "<!DOCTYPE html><html lang='en'><head><meta charset='UTF-8'><title>Communicator AI</title></head><body>";
 	$body .= "<table style='width: 100%;'>";
 	$body .= "<thead style='text-align: center;'><tr><td style='border:none;' colspan='2'>";
 	$body .= "<a href='{$link}'><img src='{$logo}' alt=''></a><br><br>";
