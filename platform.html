@@ -19,11 +19,6 @@
     <link rel="stylesheet" href="vendors/nice-select/nice-select.css">
     <link rel="stylesheet" href="css/style.css">
     <link rel="stylesheet" href="css/responsive.css">
-    <script type="text/javascript">
-    $('#contactModal').on('shown.bs.modal', function () {
-      $('#myInput').trigger('focus')
-    })
-    </script>
 </head>
 
 <body>
@@ -44,7 +39,7 @@
 
             <div class="col-lg-12">
                 <div class="contact_form">
-                    <form action="https://formspree.io/deepesh@communicator.ai" name="input" class="contact_form_box" method="POST" id="contactForm" novalidate="novalidate">
+                    <form action="https://formspree.io/deepesh@communicator.ai" name="input" class="contact_form_box" method="POST" id="contactForm">
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group text_box">
@@ -506,6 +501,7 @@
     <script src="vendors/magnify-pop/jquery.magnific-popup.min.js"></script>
     <script src="js/plugins.js"></script>
     <script src="js/main.js"></script>
+    <script src="js/form.js"></script>
 </body>
 
 </html>
