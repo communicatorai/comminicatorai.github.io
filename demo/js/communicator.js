@@ -52,7 +52,7 @@ function CommService(){
 	this.onreceive = function(){console.log("New state received");}
 }
 
-CommService.prototype._send = function(data){
+CommService.prototype._send = function(data,cb){
 	var settings = {
 		"async": true,
   		"url": this.baseURL,
@@ -63,7 +63,7 @@ CommService.prototype._send = function(data){
     	"data": JSON.stringify(data)
 	};
 	var self = this;
-	$.ajax(settings).done(self.done);
+    $.ajax(settings).done(function(e){ self.done(e); if(cb){cb(e)}});
 }
 
 CommService.prototype.init = function(){
@@ -78,7 +78,7 @@ CommService.prototype.init = function(){
 	this.initialized = true;
 	this._send(data);
 }
-CommService.prototype.send = function(msg){
+CommService.prototype.send = function(msg,cb){
 	if(!msg || msg.trim() === ""){
 		return;
 	}
@@ -86,7 +86,7 @@ CommService.prototype.send = function(msg){
 		"input": msg,
 		"state" :this.state
 	};
-	this._send(data);
+    this._send(data,cb);
 }
 CommService.prototype._upload = function(file, signedRequest, url, callback){
   const xhr = new XMLHttpRequest();
@@ -143,11 +143,14 @@ var mediumBotHtml ='<div class="init card fadeIn animated bounce delay-1s shadow
         +'<input class="messageBox" type="text" name="" value="" placeholder="Type Message here">'
         +'<div class="optionBox"></div>'
     +'<div class="fileBox"><input type="file" name="file" id="file-input"></input></div>'
-+ '<div class="uploadingBox">Uploading file..</div>'
+    + '<div class="uploadingBox">Uploading file..</div>'
+    + '<div class="sendingBox"> Sending.. </div>'
         +'<button class="sendBtn" type="button" name="button" >Send Message</button>'
         +'</div>';
 
 var agentIcon =  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><g data-name="Group 4"><g data-name="Group 3" transform="translate(-18.5 -45.5)" fill="#2680eb"><circle data-name="Ellipse 2" cx="25.5" cy="25.5" r="25.5" transform="translate(18.5 45.5)"/><path data-name="Path 2" d="M51.544 90.519l14.173 4.872a2.233 2.233 0 0 0 2.59-3.092l-6.233-14.138a1.97 1.97 0 0 0-3.364-.425l-7.94 9.265a2.2 2.2 0 0 0 .774 3.518z"/></g><path data-name="Path 1" d="M37.995 28.998a13.3 13.3 0 0 1-25.5 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="5"/></g></svg>';
+
+var closeIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#707070" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg>';
 
 var smallBotHtml = '<div class="communicatorChatBox shadow">'
       + '<div class="communicatorAgent">'
@@ -169,6 +172,8 @@ function ChatRenderer(){
 
 ChatRenderer.prototype.init = function(){
     $(".fileBox").hide();
+    $(".sendingBox").hide();
+    window.communicator.chatrenderer.hideSending();
 }
 
 ChatRenderer.prototype.getChatDate = function(){
@@ -212,6 +217,18 @@ ChatRenderer.prototype.appendChat = function(msg){
 		this.appendUserText(msg);
 	}
 }
+
+ChatRenderer.prototype.showSending = function(){
+    $(".messageBox").hide();
+    $(".sendBtn").hide();
+    $(".sendingBox").show();
+}
+
+ChatRenderer.prototype.hideSending = function(){
+    $(".messageBox").show();
+    $(".sendBtn").show();
+    $(".sendingBox").hide();
+}
 ChatRenderer.prototype.getOption = function(option){
 	l = document.createElement('li');
 	l.innerText = option;
@@ -219,7 +236,10 @@ ChatRenderer.prototype.getOption = function(option){
     l.onclick = function(e){
 	$(".optionBox").html('');
 	// Clear options
-	window.communicator.commservice.send(e.target.getAttribute("value"));
+	window.communicator.chatrenderer.showSending();
+	window.communicator.commservice.send(e.target.getAttribute("value"),function(){
+	    window.communicator.chatrenderer.hideSending();
+	});
     }
 	return l;
 }
@@ -311,12 +331,18 @@ ChatSmallBox.prototype.setOnClick = function(){
             $('.chatClose').css('display','block');
 		window.communicator.commservice.init();
 	});
-	$(".sendBtn").click(function(){
-		window.communicator.commservice.send($(".messageBox").val().trim());
+        $(".sendBtn").click(function(){
+	    window.communicator.chatrenderer.showSending();
+	    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
+		window.communicator.chatrenderer.hideSending();
+	    });
 	})
 	$(".messageBox").on('keydown',function(e){
 		if(e.key === "Enter"){
-			window.communicator.commservice.send($(".messageBox").val().trim());
+		    window.communicator.chatrenderer.showSending();
+		    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
+			window.communicator.chatrenderer.hideSending();
+		    });
 		}
 	})
 }
@@ -374,6 +400,7 @@ function start(){
     window.communicator.smallbox = new ChatSmallBox();
     window.communicator.smallbox.init();
     window.communicator.chatrenderer = new ChatRenderer();
+    window.communicator.chatrenderer.init();
     window.communicator.commservice = new CommService();
 }
 
