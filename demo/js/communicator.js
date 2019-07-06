@@ -157,10 +157,6 @@ var smallBotHtml = '<div class="communicatorChatBox shadow">'
       + mediumBotHtml
       + '</div>'
       +  '<div class="chatBody fadeIn animated bounce delay-1s ">'
-      + '<div class="aiReply">'
-      +    '<span class="chatTime">Jobeye Agent | 1:13 PM</span>'
-      +    '<p><strong style="padding-bottom:4px">Hey Jobseeker</strong> 🖐, I am Jobeye AI <br>What sort of domain do you have experience in ?</p>'
-      +  '</div>'
     + '</div>'
     +'<div class="branding fadeIn animated bounce delay-1s"><a target="_blank" href="http://communicator.ai/">⚡️ by Communicator AI</a></div>'
       +'</div>';
