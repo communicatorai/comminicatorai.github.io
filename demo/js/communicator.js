@@ -1,18 +1,45 @@
+function SJ(node){this.element = node;}
+SJ.prototype.show = function(){ this.element.style.display = 'block';}
+SJ.prototype.hide = function(){ this.element.style.display = 'none';}
+SJ.prototype.append = function(node){ this.element.appendChild(node)};
+SJ.prototype.html = function(value){ if(value){this.element.innerHTML = value;}else{ return this.element.innerHTML;}}
+SJ.prototype.val = function(v){ if(v){ this.element.value = v}else{ return this.element.value;} }
 function J(qString){
 	this.elements = [];
 	if(qString.indexOf(".")===0){
-		var className = qString.substring(1,qString.length)
-		this.elements = document.getElementsByClassName(className);
+	    var className = qString.substring(1,qString.length);
+	    this.elements = [];
+	    var elts = document.getElementsByClassName(className);
+	    for(i=0;i<elts.length;i++){
+		this.elements.push(new SJ(elts[i]));
+	    }
 	}else if(qString.indexOf("#")===0){
-		var idName = qString.substring(1,qString.length)
-		this.elements = [document.getElementById(idName)];
+	    var idName = qString.substring(1,qString.length)
+	    this.elements = [];
+	    var elts = [document.getElementById(idName)];
+	    for(i=0;i<elts.length;i++){
+		this.elements.push(new SJ(elts[i]));
+	    }
 	}
 }
 
-J.prototype.show = function(){}
-J.prototype.hide = function(){}
-J.prototype.html = function(value){}
-J.prototype.append = function(nodes){}
+J.prototype.show = function(){
+    this.elements.forEach((e)=>e.show());
+}
+J.prototype.hide = function(){
+    this.elements.forEach((e)=>e.hide());
+}
+J.prototype.val = function(v){
+    return this.elements.map((e)=>{ return e.val(v); });
+}
+J.prototype.html = function(value){
+    return this.elements.map((e)=>{ return e.html(value);});
+}
+J.prototype.append = function(node){
+    this.elements.forEach((e)=>e.append(node));
+}
+J.prototype.on = function(){}
+J.prototype.click = function(){}
 J.ajax = function(option){}
 
 function CommService(){
@@ -120,14 +147,10 @@ var mediumBotHtml ='<div class="init card fadeIn animated bounce delay-1s shadow
         +'<button class="sendBtn" type="button" name="button" >Send Message</button>'
         +'</div>';
 
+var agentIcon =  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><g data-name="Group 4"><g data-name="Group 3" transform="translate(-18.5 -45.5)" fill="#2680eb"><circle data-name="Ellipse 2" cx="25.5" cy="25.5" r="25.5" transform="translate(18.5 45.5)"/><path data-name="Path 2" d="M51.544 90.519l14.173 4.872a2.233 2.233 0 0 0 2.59-3.092l-6.233-14.138a1.97 1.97 0 0 0-3.364-.425l-7.94 9.265a2.2 2.2 0 0 0 .774 3.518z"/></g><path data-name="Path 1" d="M37.995 28.998a13.3 13.3 0 0 1-25.5 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="5"/></g></svg>';
+
 var smallBotHtml = '<div class="communicatorChatBox shadow">'
       + '<div class="communicatorAgent">'
-      +  '<div class="AgentIcon">'
-      +   '<svg xmlns="http://www.w3.org/2000/svg" width="51" height="51"><g data-name="Group 4"><g data-name="Group 3" transform="translate(-18.5 -45.5)" fill="#2680eb"><circle data-name="Ellipse 2" cx="25.5" cy="25.5" r="25.5" transform="translate(18.5 45.5)"/><path data-name="Path 2" d="M51.544 90.519l14.173 4.872a2.233 2.233 0 0 0 2.59-3.092l-6.233-14.138a1.97 1.97 0 0 0-3.364-.425l-7.94 9.265a2.2 2.2 0 0 0 .774 3.518z"/></g><path data-name="Path 1" d="M37.995 28.998a13.3 13.3 0 0 1-25.5 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="5"/></g></svg>'
-      +    '<div class="chatClose">'
-      +        '<svg xmlns="http://www.w3.org/2000/svg" width="19" height="11"><path data-name="Path 3" stroke="#707070" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg>'
-      +   '</div>'
-      +  '</div>'
       + mediumBotHtml
       + '</div>'
       +  '<div class="chatBody fadeIn animated bounce delay-1s ">'
@@ -224,7 +247,8 @@ function initFileBox(){
 
 ChatRenderer.prototype.renderInput = function(options,msg){
 	$(".optionBox").hide();
-	$(".optionBox").html('')
+        $(".optionBox").html('');
+    $(".uploadingBox").hide();
 	$(".messageBox").show();
 	$(".fileBox").hide();
 	if(msg.type === 'file'){
@@ -266,6 +290,7 @@ function ChatSmallBox(){
 
 ChatSmallBox.prototype.init = function(){
     window.communicator.smallbox.render();
+    this.hide();
     $(".fileBox").hide();
     $(".uploadingBox").hide();
     window.communicator.smallbox.setOnClick();
@@ -277,15 +302,15 @@ ChatSmallBox.prototype.setOnClick = function(){
 	});
 	$('.optionBox').hide();
 	$('.agentInput').click(function() {
-        $('.communicatorChatBox').addClass('expand');
-        $('.agentInput').removeClass('shadow');
-        $('.card').addClass('chat');
-        $('.communicatorAgent').addClass('expand');
-        $('.chatBody').css('display','block');
-        $('.card').css('display','none');
-        $('.chatClose').css('display','block');
+            $('.communicatorChatBox').addClass('expand');
+            $('.agentInput').removeClass('shadow');
+            $('.card').addClass('chat');
+            $('.communicatorAgent').addClass('expand');
+            $('.chatBody').css('display','block');
+            $('.card').css('display','none');
+            $('.chatClose').css('display','block');
 		window.communicator.commservice.init();
-    });
+	});
 	$(".sendBtn").click(function(){
 		window.communicator.commservice.send($(".messageBox").val().trim());
 	})
@@ -302,17 +327,54 @@ ChatSmallBox.prototype.render = function() {
 	document.getElementsByTagName('body')[0].appendChild(di.firstChild);
 };
 ChatSmallBox.prototype.show = function() {
+    this.visible = true;
+    $(".communicatorChatBox").show();
+    $('.communicatorAgent').addClass('open');
 }
 ChatSmallBox.prototype.hide = function() {
+    this.visible = false;
+    $(".communicatorChatBox").hide();
+}
+ChatSmallBox.prototype.toggle = function(){
+    if(this.visible){
+	this.hide();
+    }else{
+	this.show();
+    }
 }
 
-function start(){
-	window.communicator = {};
-	window.communicator.smallbox = new ChatSmallBox();
-	window.communicator.smallbox.init();
-	window.communicator.chatrenderer = new ChatRenderer();
-    window.communicator.commservice = new CommService();
+function AgentIcon(){
+    this.smallBoxOpen = false;
+}
 
+AgentIcon.prototype.init = function(){
+    this.render();
+    this.hide();
+    $(".AgentIconNew").on('click',function(){
+	window.communicator.smallbox.toggle();
+    });
+}
+AgentIcon.prototype.render = function(){
+    var aIcon = document.createElement('div');
+    aIcon.className = "AgentIconNew";
+    aIcon.innerHTML = agentIcon;
+    document.getElementsByTagName('body')[0].appendChild(aIcon);
+}
+AgentIcon.prototype.show = function(){
+    $(".AgentIconNew").show();
+}
+AgentIcon.prototype.hide = function(){
+    $(".AgentIconNew").hide();
+}
+function start(){
+    window.communicator = {};
+    window.communicator.agentIcon = new AgentIcon();
+    window.communicator.agentIcon.init();
+    window.communicator.agentIcon.show();
+    window.communicator.smallbox = new ChatSmallBox();
+    window.communicator.smallbox.init();
+    window.communicator.chatrenderer = new ChatRenderer();
+    window.communicator.commservice = new CommService();
 }
 
 window.onload = start;

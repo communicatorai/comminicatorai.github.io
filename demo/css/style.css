@@ -10,6 +10,236 @@ body {
   border:1px solid green
 }
 
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    .AgentIconNew {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	z-index: 1;
+    }
+
+    .communicatorAgent {
+  position: fixed;
+  transition: transform 1s;
+  cursor: pointer;
+}
+.communicatorAgent.open {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    background-color: #fff;
+}
+.AgentIcon {
+  border-radius: 50px;
+  width: 120px;
+  height:120px;
+  cursor: pointer;
+  transition: transform 0.5s;
+  z-index: 1
+}
+.communicatorAgent.open .AgentIcon {
+  transition: transform 1s;
+  transform: translateY(-148px);
+  margin-left: 10px;
+}
+
+.communicatorAgent.expand .AgentIcon{
+  transition: transform 1s;
+  transform: translateY(-730px);
+}
+
+.communicatorAgent.open .card {
+  transition: transform 1s;
+  transform: translateY(-440px) translateX(307px);
+  width: 100%;
+  margin-left: -10px;
+  opacity: 1;
+  z-index: -1;
+  visibility: visible;
+}
+.communicatorAgent.open .agentInput {
+  transition: transform 1s;
+  transform: translateY(0px);
+  width: 338px;
+  height: 55px;
+  margin-left: -10px;
+  cursor: text;
+  background: #fff;
+  border-radius: 8px;
+  display: block;
+}
+.agentInput{
+  display: none
+}
+.communicatorAgent.open .card p{
+  transition-delay: 0.5s;
+  opacity: 1;
+  transition: transform 0.5s;
+}
+
+.communicatorChatBox.expand{
+  position: absolute;
+  display: block;
+  transition-property: height;
+  transition-duration: 0.3s;
+  opacity: 1;
+}
+
+.card{
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+}
+.init{
+  position:absolute;
+  width: 0px;
+  height: 0px;
+  right:auto;
+  bottom: 0px;
+  transition: transform 0.5s;
+}
+
+.card p{
+  margin-top: 18px;
+  padding: 10px 20px;
+
+}
+.communicatorChatBox{
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  right: 100%;
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+
+}
+
+/*  */
+.rad{
+  border: 2px solid #166cc1;
+  border-radius: 50%;
+}
+.fadeIn{
+  transition-property: opacity;
+  transition-duration: 0.3s;
+}
+
+/*  */
+
+.communicatorChatBox input{
+  border: none;
+  padding: 5px;
+  margin: 15px;
+  width:155px
+}
+.communicatorChatBox p{
+  line-height: 22px
+}
+.chatClose{
+  width: 22px;
+  height: 22px;
+  display: block;
+  position: absolute;
+  right: -250px;
+  top: 10px;
+  display: none
+}
+/*  */
+.shadow{
+  -webkit-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+  -moz-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+  box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+}
+.communicatorChatBox textarea:focus, .communicatorChatBox input:focus,.communicatorChatBox button{
+  outline: none;
+}
+.communicatorChatBox button{
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  color: #166cc1;
+  font-size: 14px;
+}
+.communicatorChatBox .branding{
+  bottom: 8px;
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: #989696;
+}
+
+.chat{
+  box-shadow: none
+}
+.chatBody{
+  padding: 20px;
+  display:none;
+  height: 500px;
+  overflow-x: auto;
+  top: 94px;
+  position: absolute;
+  border-top:1px solid #F1F1F1;
+  border-bottom:1px solid #F1F1F1;
+  z-index: 5 !important
+}
+.chatTime{
+  font-size: 14px;
+  color:#7070707d;
+  width: 100%;
+  clear: both;
+}
+.userReply p{
+  background: #2680eb;
+  color: #fff;
+  text-align: right;
+  margin-top: 4px;
+  padding: 10px 15px;
+  width: fit-content;
+  word-break: break-all;
+  border-radius: 22px 6px 22px 22px;
+  float: right;
+}
+.userReply{
+  display: flow-root;
+}
+.userReply span{
+  float: right;
+  padding-right: 10px;
+  text-align: right;
+}
+.aiReply p{
+  margin-top:4px;
+  background: aliceblue;
+  padding: 10px 15px;
+  width:fit-content;
+  border-radius: 6px 22px 22px 22px;
+}
+.aiReply span{
+  padding-left: 10px
+}
+
+}
+
+ /********/
+@media only screen and (min-device-width: 480px) {
+    .AgentIconNew {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	z-index: 1;
+    }
 .communicatorAgent {
   position: fixed;
   bottom: 30px;
@@ -49,6 +279,9 @@ body {
   opacity: 1;
   z-index: -1;
   visibility: visible;
+  position: absolute;
+  bottom:100px;
+  right: -260px;
 }
 .communicatorAgent.open .agentInput {
   transition: transform 1s;
@@ -60,6 +293,9 @@ body {
   background: #fff;
   border-radius: 8px;
   display: block;
+  position: absolute;
+  bottom: 100px;
+  right: -260px;
 }
 .agentInput{
   display: none
@@ -226,4 +462,5 @@ body {
 }
 .aiReply span{
   padding-left: 10px
+}
 }
