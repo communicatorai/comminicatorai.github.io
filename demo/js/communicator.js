@@ -163,6 +163,8 @@ var sender = '<input class="messageBox" type="text" name="" value="" placeholder
 
 var agentIcon =  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><g data-name="Group 4"><g data-name="Group 3" transform="translate(-18.5 -45.5)" fill="#2680eb"><circle data-name="Ellipse 2" cx="25.5" cy="25.5" r="25.5" transform="translate(18.5 45.5)"/><path data-name="Path 2" d="M51.544 90.519l14.173 4.872a2.233 2.233 0 0 0 2.59-3.092l-6.233-14.138a1.97 1.97 0 0 0-3.364-.425l-7.94 9.265a2.2 2.2 0 0 0 .774 3.518z"/></g><path data-name="Path 1" d="M37.995 28.998a13.3 13.3 0 0 1-25.5 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="5"/></g></svg>';
 
+var typingIcon = '<svg width="30px" height="30px" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="xMidYMid" class="lds-ellipsis"><!--circle(cx="16",cy="50",r="10")--><circle cx="84" cy="50" r="0" fill="#ff9900"><animate attributeName="r" values="10;0;0;0;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="0s"></animate><animate attributeName="cx" values="84;84;84;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="0s"></animate></circle><circle cx="37.607" cy="50" r="10" fill="#ffb646"><animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="-0.5s"></animate><animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="-0.5s"></animate></circle><circle cx="16" cy="50" r="6.355" fill="#ff765c"><animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="-0.25s"></animate><animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="-0.25s"></animate></circle><circle cx="84" cy="50" r="3.645" fill="#fc4309"><animate attributeName="r" values="0;10;10;10;0" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="0s"></animate><animate attributeName="cx" values="16;16;50;84;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="0s"></animate></circle><circle cx="71.607" cy="50" r="10" fill="#ff9900"><animate attributeName="r" values="0;0;10;10;10" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="0s"></animate><animate attributeName="cx" values="16;16;16;50;84" keyTimes="0;0.25;0.5;0.75;1" keySplines="0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1;0 0.5 0.5 1" calcMode="spline" dur="1s" repeatCount="indefinite" begin="0s"></animate></circle></svg>';
+
 var closeIcon ='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#707070" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg>';
 
 var smallBotHtml = '<div class="communicatorChatBox shadow">'
@@ -185,7 +187,7 @@ ChatBox.prototype.init = function(){
     this.hide();
     $(".typing").hide();
     this.initialized = true;
-
+    this.setOnClick();
 }
 ChatBox.prototype.show = function(){
     this.visible = true;
@@ -195,19 +197,28 @@ ChatBox.prototype.hide = function(){
     this.visible = false;
     $(".chatBox").hide();
 }
+ChatBox.prototype.setOnClick= function(){
+    if(this.initialized){
+	$("chatHeader").on("click",function(){
+	    window.communicator.sender.toggle();
+	    window.communicator.preview.toggle();
+	});
+    }
+}
+
 ChatBox.prototype.render = function(){
     var cb = document.createElement('div');
     cb.className = "chatBox shadow";
-    cb.innerHTML = '<div class="chatHeader"><svg xmlns="http://www.w3.org/2000/svg" style="padding-top:32px;padding-right:0px" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#fff" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg></div><div class="chatBody"></div>';
+    cb.innerHTML = '<div class="chatHeader"><svg class="closeHeader" xmlns="http://www.w3.org/2000/svg" style="padding-top:32px;padding-right:0px" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#fff" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg></div><div class="chatBody"></div>';
     var par = document.getElementsByClassName("communicator-chat")[0];
     var childrenCount = par.children.length;
     par.insertBefore(cb,par.children[childrenCount-1]);
 }
 ChatBox.prototype.showTyping = function(){
-    $(".typing").show();
+    window.communicator.chatrenderer.showTyping();
 }
 ChatBox.prototype.hideTyping = function(){
-    $(".typing").hide();
+    window.communicator.chatrenderer.hideTyping();
 }
 ChatBox.prototype.toggle = function(){
     if(this.visible){
@@ -232,7 +243,10 @@ ChatRenderer.prototype.getChatDate = function(){
 	return (new Date()).toLocaleTimeString();
 }
 ChatRenderer.prototype.getBotChat= function(chat){
-	var div = document.createElement('div');
+    var div = document.createElement('div');
+    if(chat.id){
+	div.id = chat.id
+    }
 	div.className = "aiReply";
     var iH = '<span class="chatTime">Communicator Bot | '+this.getChatDate()+'</span>';
     iH = iH + '<p >'+chat.message+'</p>';
@@ -255,12 +269,15 @@ ChatRenderer.prototype.appendBotText = function(chat){
 		hDiv.scrollTop = objDiv.scrollHeight;
 	}
 }
+ChatRenderer.prototype.scrollToLatest = function(){
+    		var objDiv = $(".chatBody")[0];
+		objDiv.scrollTop = objDiv.scrollHeight;
+}
 ChatRenderer.prototype.appendUserText = function(chat){
 	if(chat.message !== ""){
 		$(".chatBody").append(this.getUserChat({"message":chat.message,"name":chat.author.name}));
 		$(".messageBox").val("");
-		var objDiv = $(".chatBody")[0];
-		objDiv.scrollTop = objDiv.scrollHeight;
+	    this.scrollToLatest();
 	}
 }
 ChatRenderer.prototype.appendChat = function(msg){
@@ -270,19 +287,31 @@ ChatRenderer.prototype.appendChat = function(msg){
 		this.appendUserText(msg);
 	}
 }
-
+ChatRenderer.prototype.showTyping = function(){
+    $(".chatBody").append(this.getBotChat({"message": typingIcon,"name":"Communicator","id":"typing"}));
+    this.scrollToLatest();
+}
+ChatRenderer.prototype.hideTyping = function(){
+    var element = document.getElementById("typing");
+    if(element){
+	element.parentNode.removeChild(element);
+	this.scrollToLatest();
+    }
+}
 ChatRenderer.prototype.showSending = function(){
     $(".messageBox").hide();
     $(".sendBtn").hide();
     $(".sendingBox").show();
-    window.communicator.chatbox.showTyping();
+    this.showTyping();
+//    window.communicator.chatbox.showTyping();
 }
 
 ChatRenderer.prototype.hideSending = function(){
     $(".messageBox").show();
     $(".sendBtn").show();
     $(".sendingBox").hide();
-    window.communicator.chatbox.hideTyping();
+    this.hideTyping();
+//    window.communicator.chatbox.hideTyping();
 }
 ChatRenderer.prototype.getOption = function(option){
 	l = document.createElement('li');
