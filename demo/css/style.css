@@ -12,6 +12,12 @@ body {
 
 @media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
 
+    .communicator-chat{
+	width: 100%;
+	height: 100%;
+	margin:0px;
+	padding: 0px;
+    }
     .AgentIconNew {
 	position: absolute;
 	bottom: 30px;
@@ -22,55 +28,62 @@ body {
     }
 
     .previewBot {
-	width:80%;
-	padding: 2%;
 	position: absolute;
+	width: 100%;
+	height: 80%;
+	padding: 2%;
 	border-radius: 12px;
 	background-color: #fff;
-	bottom: 240px;
 	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
     }
 
     .senderBox{
-	width: 90%;
+	position: absolute;
+	bottom: 0;
+	width: 100%;
 	height: 12%;
 	padding: 2%;
-	position: absolute;
 	border-radius: 12px;
 	background-color: #fff;
-	bottom: 20px;
 	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
     }
 
     .messageBox{
-	width: 100%;
+	height: 50%;
+	font-size: 2em;
+	width: 80%;
 	border-style: none;
+    }
+
+    .messageBox:focus{
+	outline: none;
     }
 
     .chatBox{
 	border-radius: 5px;
-	width: 84%;
+	width: 100%;
 	height: 60%;
+	padding: 0px;
+	margin: 0px;
 	background-color: #fff;
-  padding: 20px;
-  display:none;
-  overflow-x: auto;
-  position: absolute;
-  border-top:1px solid #F1F1F1;
-  border-bottom:1px solid #F1F1F1;
-  z-index: -1;
+	display:none;
+	overflow-x: auto;
+	border-top:1px solid #F1F1F1;
+	border-bottom:1px solid #F1F1F1;
+	z-index: -1;
     }
 
     .chatHeader{
-	width: 360px;
-	height: 80px;
+	width: 100%;
+	height: 10%;
 	background-color: #4e4ce4;
 	position: fixed;
     }
 
     .chatBody{
-	padding-left: 10px;
-	padding-right: 10px;
+	margin-top: 25%;
+	padding-left: 25px;
+	padding-right: 25px;
     }
 
     .communicatorAgent {
@@ -221,7 +234,7 @@ button{
   cursor: pointer;
   font-weight: bold;
   color: #166cc1;
-  font-size: 14px;
+  font-size: 1.3em;
 }
 .communicatorChatBox .branding{
   bottom: 8px;
@@ -285,6 +298,11 @@ button{
 
  /********/
 @media only screen and (min-device-width: 480px) {
+    .communicator-chat{
+	position: absolute;
+	    bottom: 100px;
+	right: 40px;
+    }
     .AgentIconNew {
 	position: absolute;
 	bottom: 30px;
@@ -316,7 +334,9 @@ button{
 	width: 58%;
 	border-style: none;
     }
-
+    .messageBox:focus{
+	outline: none;
+    }
     .chatBody{
 	padding-left: 10px;
 	padding-right: 10px;

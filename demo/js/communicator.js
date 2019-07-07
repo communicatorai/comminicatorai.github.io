@@ -248,7 +248,7 @@ ChatRenderer.prototype.getBotChat= function(chat){
 	div.id = chat.id
     }
 	div.className = "aiReply";
-    var iH = '<span class="chatTime">Communicator Bot | '+this.getChatDate()+'</span>';
+    var iH = '<span class="chatTime">'+chat.name+' | '+this.getChatDate()+'</span>';
     iH = iH + '<p >'+chat.message+'</p>';
     div.innerHTML = iH;
     return div;
@@ -288,7 +288,7 @@ ChatRenderer.prototype.appendChat = function(msg){
 	}
 }
 ChatRenderer.prototype.showTyping = function(){
-    $(".chatBody").append(this.getBotChat({"message": typingIcon,"name":"Communicator","id":"typing"}));
+    $(".chatBody").append(this.getBotChat({"message": typingIcon,"name":"Communicator bot is typing...","id":"typing"}));
     this.scrollToLatest();
 }
 ChatRenderer.prototype.hideTyping = function(){
@@ -323,6 +323,7 @@ ChatRenderer.prototype.getOption = function(option){
 	window.communicator.chatrenderer.showSending();
 	window.communicator.commservice.send(e.target.getAttribute("value"),function(){
 	    window.communicator.chatrenderer.hideSending();
+	    window.communicator.sender.focusInput();
 	});
     }
 	return l;
@@ -422,6 +423,7 @@ ChatSmallBox.prototype.setOnClick = function(){
 		    window.communicator.chatrenderer.showSending();
 		    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
 			window.communicator.chatrenderer.hideSending();
+			window.communicator.sender.focusInput();
 		    });
 		}
 	})
@@ -471,6 +473,7 @@ Sender.prototype.setOnClick = function(){
 	    window.communicator.chatrenderer.showSending();
 	    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
 		window.communicator.chatrenderer.hideSending();
+		window.communicator.sender.focusInput();
 	    });
 	})
     $(".messageBox").on('keydown',function(e){
@@ -478,6 +481,7 @@ Sender.prototype.setOnClick = function(){
 		    window.communicator.chatrenderer.showSending();
 		    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
 			window.communicator.chatrenderer.hideSending();
+			window.communicator.sender.focusInput();
 		    });
 		}
     });
@@ -492,6 +496,9 @@ Sender.prototype.render = function(){
     sendr.className = 'senderBox';
     sendr.innerHTML = sender;
     document.getElementsByClassName('communicator-chat')[0].appendChild(sendr);
+}
+Sender.prototype.focusInput = function(){
+    $(".messageBox").focus();
 }
 Sender.prototype.show = function(){
     this.visible = true;
