@@ -42,7 +42,7 @@ body {
     }
 
     .senderBox{
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	width: 100%;
 	height: 12%;
@@ -270,6 +270,7 @@ button{
   clear: both;
 }
 .userReply p{
+    font-size: 3em;
   background: #2680eb;
   color: #fff;
   text-align: right;
