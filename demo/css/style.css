@@ -340,7 +340,7 @@ button{
     }
 
     .senderBox{
-	width: 350px;
+	width: 370px;
 	padding: 10px;
 	border-radius: 12px;
 	background-color: #fff;
@@ -356,8 +356,8 @@ button{
 	outline: none;
     }
     .chatBody{
-	padding-left: 10px;
-	padding-right: 10px;
+	padding-left: 20px;
+	padding-right: 20px;
 	padding-top: 110px;
     }
 
@@ -542,7 +542,7 @@ button{
 .chatBox{
     padding-bottom: 10px;
   display:none;
-  width: 370px;
+  width: 390px;
   height: 500px;
   overflow-x: auto;
   border-bottom:1px solid #F1F1F1;
@@ -552,7 +552,7 @@ button{
   margin-bottom: 10px;
 }
 .chatHeader{
-    	width: 370px;
+    	width: 390px;
 	height: 80px;
 	background-color: #4e4ce4;
 	text-align: right;
