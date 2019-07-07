@@ -80,9 +80,10 @@ CommService.prototype.init = function(cb){
     this._send(data,cb);
 }
 CommService.prototype.send = function(msg,cb){
-	if(!msg || msg.trim() === ""){
-		return;
-	}
+    if(!msg || msg.trim() === ""){
+	cb();
+	return;
+    }
 	var data ={
 		"input": msg,
 		"state" :this.state
