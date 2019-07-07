@@ -278,12 +278,12 @@ button{
   clear: both;
 }
 .userReply p{
-    font-size: 3em;
+    font-size: 2em;
   background: #2680eb;
   color: #fff;
   text-align: right;
   margin-top: 4px;
-  padding: 10px 15px;
+  padding: 40px 60px;
   width: fit-content;
   word-break: break-all;
   border-radius: 22px 6px 22px 22px;
@@ -300,10 +300,10 @@ button{
 .aiReply p{
   margin-top:4px;
   background: aliceblue;
-  padding: 10px 15px;
+  padding: 40px 60px;
   width:fit-content;
   border-radius: 6px 22px 22px 22px;
-  font-size: 3em;
+  font-size: 2em;
 }
 .aiReply span{
   padding-left: 10px
