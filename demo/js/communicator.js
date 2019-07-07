@@ -199,9 +199,9 @@ ChatBox.prototype.hide = function(){
 }
 ChatBox.prototype.setOnClick= function(){
     if(this.initialized){
-	$("chatHeader").on("click",function(){
+	$(".chatHeader").on("click",function(){
+	    window.communicator.chatbox.toggle();
 	    window.communicator.sender.toggle();
-	    window.communicator.preview.toggle();
 	});
     }
 }
@@ -517,19 +517,23 @@ Sender.prototype.toggle = function(){
 }
 
 
-function Preview(){ this.rendering = false;}
+function Preview(){ this.isShownB = false;this.rendering = false;}
 Preview.prototype.init = function(){
     this.render();
     this.setOnClick();
     this.hide();
 }
 
-Preview.prototype.setOnClick = function(){
+Preview.prototype.isShown = function(){
+    return this.isShownB;
+}
 
+Preview.prototype.setOnClick = function(){
 }
 
 Preview.prototype.show = function(){
     this.rendering = true;
+    this.isShownB = true;
     $(".previewBot").show();
 }
 
@@ -560,7 +564,11 @@ AgentIcon.prototype.init = function(){
     this.hide();
     $(".AgentIconNew").on('click',function(){
 	window.communicator.sender.toggle();
-	window.communicator.preview.toggle();
+	if(window.communicator.preview.isShown()){
+	    window.communicator.chatbox.show();
+	}else{
+	    window.communicator.preview.toggle();
+	}
     });
 }
 AgentIcon.prototype.render = function(){
