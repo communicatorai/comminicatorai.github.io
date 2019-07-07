@@ -295,24 +295,19 @@ button{
     }
 
     .previewBot {
-	width: 350px;
+	width: 360px;
 	padding: 14px;
-	position: absolute;
 	border-radius: 12px;
 	background-color: #fff;
-	bottom: 200px;
-	right: 40px;
 	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+	margin-bottom: 10px;
     }
 
     .senderBox{
 	width: 350px;
 	padding: 10px;
-	position: absolute;
 	border-radius: 12px;
 	background-color: #fff;
-	bottom: 110px;
-	right: 40px;
 	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
 	z-index: 12;
     }
@@ -509,19 +504,17 @@ button{
 .chatBox{
     padding-bottom: 10px;
   display:none;
-  width: 360px;
+  width: 370px;
   height: 500px;
   overflow-x: auto;
-  position: absolute;
   border-bottom:1px solid #F1F1F1;
   z-index: 5 !important;
   background-color: #fff;
-  bottom: 200px;
-  right: 40px;
-  border-radius: 5px;
+  border-radius: 12px;
+  margin-bottom: 10px;
 }
 .chatHeader{
-    	width: 360px;
+    	width: 370px;
 	height: 80px;
 	background-color: #4e4ce4;
 	text-align: right;

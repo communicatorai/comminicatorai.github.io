@@ -199,7 +199,9 @@ ChatBox.prototype.render = function(){
     var cb = document.createElement('div');
     cb.className = "chatBox shadow";
     cb.innerHTML = '<div class="chatHeader"><svg xmlns="http://www.w3.org/2000/svg" style="padding-top:32px;padding-right:0px" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#fff" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg></div><div class="chatBody"></div>';
-    document.getElementsByTagName("body")[0].appendChild(cb);
+    var par = document.getElementsByClassName("communicator-chat")[0];
+    var childrenCount = par.children.length;
+    par.insertBefore(cb,par.children[childrenCount-1]);
 }
 ChatBox.prototype.showTyping = function(){
     $(".typing").show();
@@ -399,7 +401,7 @@ ChatSmallBox.prototype.setOnClick = function(){
 ChatSmallBox.prototype.render = function() {
 	var di = document.createElement('div');
 	di.innerHTML = smallBotHtml;
-	document.getElementsByTagName('body')[0].appendChild(di.firstChild);
+    document.getElementsByClassName("communicator-chat")[0].appendChild(di.firstChild);
 };
 ChatSmallBox.prototype.show = function() {
     this.visible = true;
@@ -460,7 +462,7 @@ Sender.prototype.render = function(){
     var sendr = document.createElement('div');
     sendr.className = 'senderBox';
     sendr.innerHTML = sender;
-    document.getElementsByTagName('body')[0].appendChild(sendr);
+    document.getElementsByClassName('communicator-chat')[0].appendChild(sendr);
 }
 Sender.prototype.show = function(){
     this.visible = true;
@@ -510,7 +512,7 @@ Preview.prototype.render = function(){
     var aIcon = document.createElement('div');
     aIcon.className = "previewBot";
     aIcon.innerHTML = previewBot;
-    document.getElementsByTagName('body')[0].appendChild(aIcon);
+    document.getElementsByClassName('communicator-chat')[0].appendChild(aIcon);
 }
 
 function AgentIcon(){
