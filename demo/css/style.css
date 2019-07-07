@@ -361,8 +361,9 @@ button{
 	padding-top: 110px;
     }
 
-    li {
-	list-style: none;
+    .optiontag {
+	margin: 1px;
+	float:left;
 	border-radius: 20px;
 	background-color: #4e4ce4;
 	width: fit-content;
