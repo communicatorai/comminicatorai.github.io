@@ -163,7 +163,7 @@ var sender = '<input class="messageBox" type="text" name="" value="" placeholder
 
 var agentIcon =  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><g data-name="Group 4"><g data-name="Group 3" transform="translate(-18.5 -45.5)" fill="#2680eb"><circle data-name="Ellipse 2" cx="25.5" cy="25.5" r="25.5" transform="translate(18.5 45.5)"/><path data-name="Path 2" d="M51.544 90.519l14.173 4.872a2.233 2.233 0 0 0 2.59-3.092l-6.233-14.138a1.97 1.97 0 0 0-3.364-.425l-7.94 9.265a2.2 2.2 0 0 0 .774 3.518z"/></g><path data-name="Path 1" d="M37.995 28.998a13.3 13.3 0 0 1-25.5 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="5"/></g></svg>';
 
-var closeIcon = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#707070" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg>';
+var closeIcon ='<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#707070" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg>';
 
 var smallBotHtml = '<div class="communicatorChatBox shadow">'
       + '<div class="communicatorAgent">'
@@ -183,21 +183,22 @@ ChatBox.prototype.init = function(){
     }
     this.render();
     this.hide();
+    $(".typing").hide();
     this.initialized = true;
 
 }
 ChatBox.prototype.show = function(){
     this.visible = true;
-    $(".chatBody").show();
+    $(".chatBox").show();
 }
 ChatBox.prototype.hide = function(){
     this.visible = false;
-    $(".chatBody").hide();
+    $(".chatBox").hide();
 }
 ChatBox.prototype.render = function(){
     var cb = document.createElement('div');
-    cb.className = "chatBody shadow";
-    cb.innerHTML = "";
+    cb.className = "chatBox shadow";
+    cb.innerHTML = '<div class="chatHeader"><svg xmlns="http://www.w3.org/2000/svg" style="padding-top:32px;padding-right:0px" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#fff" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg></div><div class="chatBody"></div>';
     document.getElementsByTagName("body")[0].appendChild(cb);
 }
 ChatBox.prototype.showTyping = function(){
@@ -221,6 +222,7 @@ function ChatRenderer(){
 ChatRenderer.prototype.init = function(){
     $(".fileBox").hide();
     $(".sendingBox").hide();
+    $(".optionBox").hide();
     window.communicator.chatrenderer.hideSending();
 }
 
@@ -246,8 +248,9 @@ ChatRenderer.prototype.getUserChat = function(chat){
 ChatRenderer.prototype.appendBotText = function(chat){
 	if(chat.message !== ""){
 		$(".chatBody").append(this.getBotChat({"message":chat.message,"name":chat.author.name}));
-		var objDiv = $(".chatBody")[0];
-		objDiv.scrollTop = objDiv.scrollHeight;
+	    var objDiv = $(".chatBody")[0];
+	    var hDiv = $(".chatBox")[0];
+		hDiv.scrollTop = objDiv.scrollHeight;
 	}
 }
 ChatRenderer.prototype.appendUserText = function(chat){
@@ -361,6 +364,7 @@ function ChatSmallBox(){
 ChatSmallBox.prototype.init = function(){
     window.communicator.smallbox.render();
     this.hide();
+    $(".optionBox").hide();
     $(".fileBox").hide();
     $(".uploadingBox").hide();
     window.communicator.smallbox.setOnClick();
