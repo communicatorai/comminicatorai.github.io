@@ -229,7 +229,8 @@ ChatBox.prototype.toggle = function(){
 }
 
 function ChatRenderer(){
-	this.rendered = {};
+    this.rendered = {};
+    this.showingOptions = false;
 }
 
 ChatRenderer.prototype.init = function(){
@@ -299,7 +300,11 @@ ChatRenderer.prototype.hideTyping = function(){
     }
 }
 ChatRenderer.prototype.showSending = function(){
-    $(".messageBox").hide();
+    if(!this.showingOptions){
+	$(".messageBox").hide();
+    }else{
+	$(".optionBox").hide();
+    }
     $(".sendBtn").hide();
     $(".sendingBox").show();
     this.showTyping();
@@ -307,7 +312,11 @@ ChatRenderer.prototype.showSending = function(){
 }
 
 ChatRenderer.prototype.hideSending = function(){
-    $(".messageBox").show();
+    if(!this.showingOptions){
+	$(".messageBox").show();
+    }else{
+	$(".optionBox").show();
+    }
     $(".sendBtn").show();
     $(".sendingBox").hide();
     this.hideTyping();
@@ -323,6 +332,7 @@ ChatRenderer.prototype.getOption = function(option){
 	window.communicator.chatrenderer.showSending();
 	window.communicator.commservice.send(e.target.getAttribute("value"),function(){
 	    window.communicator.chatrenderer.hideSending();
+	    window.communicator.chatrenderer.showingOptions = false;
 	    window.communicator.sender.focusInput();
 	});
     }
@@ -353,7 +363,7 @@ function initFileBox(){
 ChatRenderer.prototype.renderInput = function(options,msg){
 	$(".optionBox").hide();
         $(".optionBox").html('');
-    $(".uploadingBox").hide();
+        $(".uploadingBox").hide();
 	$(".messageBox").show();
 	$(".fileBox").hide();
 	if(msg.type === 'file'){
@@ -368,6 +378,7 @@ ChatRenderer.prototype.renderInput = function(options,msg){
 		}).forEach((ch)=>{
 			list.append(ch);
 		})
+	    this.showingOptions = true;
 		$(".optionBox").append(list);
 		$(".optionBox").show();
 		$(".messageBox").hide();
