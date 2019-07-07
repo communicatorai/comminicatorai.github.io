@@ -26,6 +26,10 @@ body {
 	cursor: pointer;
 	z-index: 1;
     }
+    .AgentIconSVG{
+	width: 8em;
+	height: 8em;
+    }
 
     .previewBot {
 	position: absolute;
@@ -50,8 +54,8 @@ body {
 
     .messageBox{
 	height: 50%;
-	font-size: 2em;
-	width: 80%;
+	font-size: 3em;
+	width: 70%;
 	border-style: none;
     }
 
@@ -105,6 +109,7 @@ body {
   transition: transform 0.5s;
   z-index: 1
 }
+
 .communicatorAgent.open .AgentIcon {
   transition: transform 1s;
   transform: translateY(-148px);
@@ -234,7 +239,7 @@ button{
   cursor: pointer;
   font-weight: bold;
   color: #166cc1;
-  font-size: 1.3em;
+  font-size: 2em;
 }
 .communicatorChatBox .branding{
   bottom: 8px;
@@ -259,7 +264,7 @@ button{
   z-index: 5 !important
 }
 .chatTime{
-  font-size: 14px;
+  font-size: 2em;
   color:#7070707d;
   width: 100%;
   clear: both;
@@ -289,6 +294,7 @@ button{
   padding: 10px 15px;
   width:fit-content;
   border-radius: 6px 22px 22px 22px;
+  font-size: 3em;
 }
 .aiReply span{
   padding-left: 10px
@@ -311,7 +317,10 @@ button{
 	cursor: pointer;
 	z-index: 1;
     }
-
+    .AgentIconSVG{
+	width: 4em;
+	height: 4em;
+    }
     .previewBot {
 	width: 360px;
 	padding: 14px;
