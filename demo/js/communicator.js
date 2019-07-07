@@ -66,17 +66,18 @@ CommService.prototype._send = function(data,cb){
     $.ajax(settings).done(function(e){ self.done(e); if(cb){cb(e)}});
 }
 
-CommService.prototype.init = function(){
-	if(this.initialized){
-		return;
-	}
+CommService.prototype.init = function(cb){
+    if(this.initialized){
+	cb();
+	return;
+    }
 	var data ={
 		"state" :{
 			"action": "start"
 		}
 	};
 	this.initialized = true;
-	this._send(data);
+    this._send(data,cb);
 }
 CommService.prototype.send = function(msg,cb){
 	if(!msg || msg.trim() === ""){
@@ -137,7 +138,7 @@ CommService.prototype.getState = function(){
 
 
 var mediumBotHtml ='<div class="init card fadeIn animated bounce delay-1s shadow">'
-          + '<p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Jobeye AI <br>What sort of domain do you have experience in ?</p>'
+          + '<p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Communicator AI bot <br>I will help you with your career opportunities</p>'
         	+'</div>'
         +'<div class="init agentInput fadeIn animated bounce 800ms shadow">'
         +'<input class="messageBox" type="text" name="" value="" placeholder="Type Message here">'
@@ -146,7 +147,18 @@ var mediumBotHtml ='<div class="init card fadeIn animated bounce delay-1s shadow
     + '<div class="uploadingBox">Uploading file..</div>'
     + '<div class="sendingBox"> Sending.. </div>'
         +'<button class="sendBtn" type="button" name="button" >Send Message</button>'
-        +'</div>';
+    +'</div>';
+
+var previewBot ='<div class="initNew cardNew fadeInNew animatedNew bounceNew delay-1s-new shadowNew">'
+          + '<p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Jobeye AI <br>What sort of domain do you have experience in ?</p>'
+        	+'</div>'
+
+var sender = '<input class="messageBox" type="text" name="" value="" placeholder="Type Message here">'
+    +'<div class="optionBox"></div>'
+    +'<div class="fileBox"><input type="file" name="file" id="file-input"></input></div>'
+    + '<div class="uploadingBox">Uploading file..</div>'
+    + '<div class="sendingBox"> Sending.. </div>'
+    +'<button class="sendBtn" type="button" name="button" >Send Message</button>';
 
 var agentIcon =  '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 55 55" width="4em" height="4em"><g data-name="Group 4"><g data-name="Group 3" transform="translate(-18.5 -45.5)" fill="#2680eb"><circle data-name="Ellipse 2" cx="25.5" cy="25.5" r="25.5" transform="translate(18.5 45.5)"/><path data-name="Path 2" d="M51.544 90.519l14.173 4.872a2.233 2.233 0 0 0 2.59-3.092l-6.233-14.138a1.97 1.97 0 0 0-3.364-.425l-7.94 9.265a2.2 2.2 0 0 0 .774 3.518z"/></g><path data-name="Path 1" d="M37.995 28.998a13.3 13.3 0 0 1-25.5 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="5"/></g></svg>';
 
@@ -156,11 +168,50 @@ var smallBotHtml = '<div class="communicatorChatBox shadow">'
       + '<div class="communicatorAgent">'
       + mediumBotHtml
       + '</div>'
-      +  '<div class="chatBody fadeIn animated bounce delay-1s ">'
+    +  '<div class="chatBody fadeIn animated bounce delay-1s ">'
++'<div class="aiReply typing"><span class="chatTime">Communicator Bot</span><p>...</p></div>'
     + '</div>'
     +'<div class="branding fadeIn animated bounce delay-1s"><a target="_blank" href="http://communicator.ai/">⚡️ by Communicator AI</a></div>'
       +'</div>';
 
+
+function ChatBox(){this.initialized = false;this.visible = false;}
+ChatBox.prototype.init = function(){
+    if(this.initialized){
+	return;
+    }
+    this.render();
+    this.hide();
+    this.initialized = true;
+
+}
+ChatBox.prototype.show = function(){
+    this.visible = true;
+    $(".chatBody").show();
+}
+ChatBox.prototype.hide = function(){
+    this.visible = false;
+    $(".chatBody").hide();
+}
+ChatBox.prototype.render = function(){
+    var cb = document.createElement('div');
+    cb.className = "chatBody shadow";
+    cb.innerHTML = "";
+    document.getElementsByTagName("body")[0].appendChild(cb);
+}
+ChatBox.prototype.showTyping = function(){
+    $(".typing").show();
+}
+ChatBox.prototype.hideTyping = function(){
+    $(".typing").hide();
+}
+ChatBox.prototype.toggle = function(){
+    if(this.visible){
+	this.hide();
+    }else{
+	this.show();
+    }
+}
 
 function ChatRenderer(){
 	this.rendered = {};
@@ -218,12 +269,14 @@ ChatRenderer.prototype.showSending = function(){
     $(".messageBox").hide();
     $(".sendBtn").hide();
     $(".sendingBox").show();
+    window.communicator.chatbox.showTyping();
 }
 
 ChatRenderer.prototype.hideSending = function(){
     $(".messageBox").show();
     $(".sendBtn").show();
     $(".sendingBox").hide();
+    window.communicator.chatbox.hideTyping();
 }
 ChatRenderer.prototype.getOption = function(option){
 	l = document.createElement('li');
@@ -327,12 +380,7 @@ ChatSmallBox.prototype.setOnClick = function(){
             $('.chatClose').css('display','block');
 		window.communicator.commservice.init();
 	});
-        $(".sendBtn").click(function(){
-	    window.communicator.chatrenderer.showSending();
-	    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
-		window.communicator.chatrenderer.hideSending();
-	    });
-	})
+
 	$(".messageBox").on('keydown',function(e){
 		if(e.key === "Enter"){
 		    window.communicator.chatrenderer.showSending();
@@ -365,6 +413,101 @@ ChatSmallBox.prototype.toggle = function(){
     }
 }
 
+function Sender(){this.visible = false;}
+Sender.prototype.init = function(){
+    this.render();
+    this.hide();
+    $(".sendingBox").hide();
+    $(".uploadingBox").hide();
+    this.setOnClick();
+}
+Sender.prototype.setOnClick = function(){
+    $(".senderBox").on('click',function(){
+	window.communicator.chatbox.init();
+	window.communicator.chatbox.showTyping()
+	window.communicator.commservice.init(function(){
+	    window.communicator.chatbox.hideTyping();
+	});
+	window.communicator.chatbox.show();
+	window.communicator.preview.hide();
+    });
+        $(".sendBtn").click(function(){
+	    window.communicator.chatrenderer.showSending();
+	    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
+		window.communicator.chatrenderer.hideSending();
+	    });
+	})
+    $(".messageBox").on('keydown',function(e){
+		if(e.key === "Enter"){
+		    window.communicator.chatrenderer.showSending();
+		    window.communicator.commservice.send($(".messageBox").val().trim(),function(){
+			window.communicator.chatrenderer.hideSending();
+		    });
+		}
+    });
+
+    $(".messageBox").on('click',function(){
+	window.communicator.chatbox.show();
+	window.communicator.preview.hide();
+    });
+}
+Sender.prototype.render = function(){
+    var sendr = document.createElement('div');
+    sendr.className = 'senderBox';
+    sendr.innerHTML = sender;
+    document.getElementsByTagName('body')[0].appendChild(sendr);
+}
+Sender.prototype.show = function(){
+    this.visible = true;
+    $(".senderBox").show();
+}
+Sender.prototype.hide = function(){
+    this.visible = false;
+    $(".senderBox").hide();
+}
+Sender.prototype.toggle = function(){
+    if(this.visible){
+	this.hide();
+    }else{
+	this.show();
+    }
+}
+
+
+function Preview(){ this.rendering = false;}
+Preview.prototype.init = function(){
+    this.render();
+    this.setOnClick();
+    this.hide();
+}
+
+Preview.prototype.setOnClick = function(){
+
+}
+
+Preview.prototype.show = function(){
+    this.rendering = true;
+    $(".previewBot").show();
+}
+
+Preview.prototype.hide = function(){
+    this.rendering = false;
+    $(".previewBot").hide();
+}
+Preview.prototype.toggle = function(){
+    if(this.rendering){
+	this.hide();
+    }else{
+	this.show();
+    }
+}
+Preview.prototype.render = function(){
+    var aIcon = document.createElement('div');
+    aIcon.className = "previewBot";
+    aIcon.innerHTML = previewBot;
+    document.getElementsByTagName('body')[0].appendChild(aIcon);
+}
+
 function AgentIcon(){
     this.smallBoxOpen = false;
 }
@@ -373,7 +516,8 @@ AgentIcon.prototype.init = function(){
     this.render();
     this.hide();
     $(".AgentIconNew").on('click',function(){
-	window.communicator.smallbox.toggle();
+	window.communicator.sender.toggle();
+	window.communicator.preview.toggle();
     });
 }
 AgentIcon.prototype.render = function(){
@@ -393,8 +537,11 @@ function start(){
     window.communicator.agentIcon = new AgentIcon();
     window.communicator.agentIcon.init();
     window.communicator.agentIcon.show();
-    window.communicator.smallbox = new ChatSmallBox();
-    window.communicator.smallbox.init();
+    window.communicator.preview = new Preview();
+    window.communicator.preview.init();
+    window.communicator.sender = new Sender();
+    window.communicator.sender.init();
+    window.communicator.chatbox = new ChatBox();
     window.communicator.chatrenderer = new ChatRenderer();
     window.communicator.chatrenderer.init();
     window.communicator.commservice = new CommService();

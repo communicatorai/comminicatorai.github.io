@@ -21,6 +21,44 @@ body {
 	z-index: 1;
     }
 
+    .previewBot {
+	width:80%;
+	padding: 2%;
+	position: absolute;
+	border-radius: 12px;
+	background-color: #fff;
+	bottom: 240px;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+    }
+
+    .senderBox{
+	width: 80%;
+	padding: 2%;
+	position: absolute;
+	border-radius: 12px;
+	background-color: #fff;
+	bottom: 130px;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+    }
+
+    .messageBox{
+	width: 100%;
+	border-style: none;
+    }
+
+    .chatBody{
+	width: 100%;
+	height: 100%;
+	background-color: #fff;
+  padding: 20px;
+  display:none;
+  overflow-x: auto;
+  position: absolute;
+  border-top:1px solid #F1F1F1;
+  border-bottom:1px solid #F1F1F1;
+  z-index: -1;
+    }
+
     .communicatorAgent {
   position: fixed;
   transition: transform 1s;
@@ -159,7 +197,8 @@ body {
 .communicatorChatBox textarea:focus, .communicatorChatBox input:focus,.communicatorChatBox button{
   outline: none;
 }
-.communicatorChatBox button{
+
+button{
   background: #fff;
   border: none;
   padding: 10px 20px;
@@ -181,7 +220,7 @@ body {
 .chat{
   box-shadow: none
 }
-.chatBody{
+.chatBodyOld{
   padding: 20px;
   display:none;
   height: 500px;
@@ -235,11 +274,34 @@ body {
     .AgentIconNew {
 	position: absolute;
 	bottom: 30px;
-	right: 30px;
+	right: 40px;
 	border-radius: 50px;
 	cursor: pointer;
 	z-index: 1;
     }
+
+    .previewBot {
+	width: 350px;
+	padding: 14px;
+	position: absolute;
+	border-radius: 12px;
+	background-color: #fff;
+	bottom: 200px;
+	right: 40px;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+    }
+
+    .senderBox{
+	width: 350px;
+	padding: 10px;
+	position: absolute;
+	border-radius: 12px;
+	background-color: #fff;
+	bottom: 110px;
+	right: 40px;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+    }
+
 .communicatorAgent {
   position: fixed;
   bottom: 30px;
@@ -390,7 +452,8 @@ body {
 .communicatorChatBox textarea:focus, .communicatorChatBox input:focus,.communicatorChatBox button{
   outline: none;
 }
-.communicatorChatBox button{
+
+button{
   background: #fff;
   border: none;
   padding: 10px 20px;
@@ -420,13 +483,17 @@ body {
 .chatBody{
   padding: 20px;
   display:none;
+  width: 360px;
   height: 500px;
   overflow-x: auto;
-  top: 94px;
   position: absolute;
   border-top:1px solid #F1F1F1;
   border-bottom:1px solid #F1F1F1;
-  z-index: 5 !important
+  z-index: 5 !important;
+  background-color: #fff;
+  bottom: 200px;
+  right: 40px;
+  border-radius: 5px;
 }
 .chatTime{
   font-size: 14px;
