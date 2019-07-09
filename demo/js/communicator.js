@@ -142,7 +142,7 @@ var mediumBotHtml ='<div class="init card fadeIn animated bounce delay-1s shadow
           + '<p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Communicator AI bot <br>I will help you with your career opportunities</p>'
         	+'</div>'
         +'<div class="init agentInput fadeIn animated bounce 800ms shadow">'
-        +'<input class="messageBox" type="text" name="" value="" placeholder="Type Message here">'
+        +'<input class="messageBox" type="text" name="" value="" placeholder="Write a reply">'
         +'<div class="optionBox"></div>'
     +'<div class="fileBox"><input type="file" name="file" id="file-input"></input></div>'
     + '<div class="uploadingBox">Uploading file..</div>'
@@ -154,7 +154,7 @@ var previewBot ='<div class="initNew cardNew fadeInNew animatedNew bounceNew del
           + '<p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Jobeye AI <br>What sort of domain do you have experience in ?</p>'
         	+'</div>'
 
-var sender = '<input class="messageBox" type="text" name="" value="" placeholder="Type Message here">'
+var sender = '<input class="messageBox" type="text" name="" value="" placeholder="Write a reply">'
     +'<div class="optionBox"></div>'
     +'<div class="fileBox"><input type="file" name="file" id="file-input"></input></div>'
     + '<div class="uploadingBox">Uploading file..</div>'
@@ -202,6 +202,7 @@ ChatBox.prototype.setOnClick= function(){
 	$(".chatHeader").on("click",function(){
 	    window.communicator.chatbox.toggle();
 	    window.communicator.sender.toggle();
+	    $(".AgentIconNew").removeClass("open");
 	});
     }
 }
@@ -209,7 +210,7 @@ ChatBox.prototype.setOnClick= function(){
 ChatBox.prototype.render = function(){
     var cb = document.createElement('div');
     cb.className = "chatBox shadow";
-    cb.innerHTML = '<div class="chatHeader"><svg class="closeHeader" xmlns="http://www.w3.org/2000/svg" style="padding-top:32px;padding-right:0px" viewBox="0 0 55 55" width="4em" height="4em"><path data-name="Path 3" stroke="#fff" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity="1"/></svg></div><div class="chatBody"></div>';
+    cb.innerHTML = '<div class="chatHeader"><div class="closeHeaderParent"><svg class="closeHeader" xmlns="http://www.w3.org/2000/svg" style="padding-top:32px;padding-right:0px" viewBox="0 0 55 55"><path data-name="Path 3" stroke="#fff" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity="1"/></svg></div></div><div class="chatBody"></div>';
     var par = document.getElementsByClassName("communicator-chat")[0];
     var childrenCount = par.children.length;
     par.insertBefore(cb,par.children[childrenCount-1]);
@@ -577,9 +578,11 @@ AgentIcon.prototype.init = function(){
     $(".AgentIconNew").on('click',function(){
 	window.communicator.sender.toggle();
 	if(window.communicator.preview.isShown()){
+	    $(".AgentIconNew").addClass("open");
 	    window.communicator.chatbox.show();
 	}else{
 	    window.communicator.preview.toggle();
+	    $(".AgentIconNew").addClass("open");
 	}
     });
 }
