@@ -80,29 +80,25 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+      <input type="hidden" id="jd-id" value=""></input>
+      <input type="hidden" id="jd-tags" value=""></input>
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <i class="fas fa-user prefix grey-text"></i>
-          <input type="text" id="title" class="form-control validate">
           <label data-error="wrong" data-success="right" for="form34">Title</label>
-        </div>
-
-        <div class="md-form mb-5">
-          <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email" id="tags" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="form29">Tags</label>
+          <input type="text" id="jd-title" class="form-control validate">
         </div>
 
         <div class="md-form mb-5">
           <i class="fas fa-tag prefix grey-text"></i>
-          <input type="text" id="shortdescription" class="form-control validate">
           <label data-error="wrong" data-success="right" for="form32">Short Description</label>
+          <input type="text" id="jd-shortdescription" class="form-control validate">
         </div>
 
         <div class="md-form">
           <i class="fas fa-pencil prefix grey-text"></i>
-          <textarea type="text" id="longdescription" class="md-textarea form-control" rows="4"></textarea>
           <label data-error="wrong" data-success="right" for="form8">Long Description</label>
+          <textarea type="text" id="jd-longdescription" class="md-textarea form-control" rows="4"></textarea>
         </div>
 
       </div>
@@ -123,29 +119,25 @@
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
+            <input type="hidden" id="candidate-id" value=""></input>
+      <input type="hidden" id="candidate-tags" value=""></input>
       <div class="modal-body mx-3">
         <div class="md-form mb-5">
           <i class="fas fa-user prefix grey-text"></i>
-          <input type="text" id="candidate-name" class="form-control validate">
           <label data-error="wrong" data-success="right" for="form34">Full name</label>
+          <input type="text" id="candidate-name" class="form-control validate">
         </div>
 
         <div class="md-form mb-5">
           <i class="fas fa-envelope prefix grey-text"></i>
-          <input type="email" id="candidate-email" class="form-control validate">
           <label data-error="wrong" data-success="right" for="form29">Candidate email</label>
+          <input type="email" id="candidate-email" class="form-control validate">
         </div>
-
-	<div class="md-form mb-5">
-          <i class="fas fa-tag prefix grey-text"></i>
-          <input type="text" id="candidate-tags" class="form-control validate">
-          <label data-error="wrong" data-success="right" for="candidate-tags">Tags</label>
-	</div>
 
         <div class="md-form mb-5">
           <i class="fas fa-tag prefix grey-text"></i>
-          <input type="text" id="candidate-resume" class="form-control validate">
           <label data-error="wrong" data-success="right" for="form32">Resume</label>
+          <input type="text" id="candidate-resume" class="form-control validate">
         </div>
 
       </div>
@@ -295,8 +287,13 @@
 	  var key = currentPage.split(".")[0];
 	  var category = key;
 	  if(event ==="edit"){
-
-//	      hs._edit(key,obj)
+	      var obj = hs._getOne(key,id);
+	      var keys = Object.keys(obj);
+	      keys.forEach((a)=>{
+		  $("#"+key+"-"+a).val(obj[a]);
+	      });
+	      //	      hs._edit(key,obj)
+	      	  $("#modal"+key+"Form").modal('toggle');
 	  }else if(event === "delete"){
 	      hs._delete(key,hs._getOne(key,id));
 
@@ -321,14 +318,16 @@
 
       function updatejd(){
 	  var category = currentPage.split(".")[1];
-	  var id = Math.round(Math.random()*100000000)%(new Date()).getTime();
 	  var obj = {
-	      "id":id,
-	      "title": $("#title").val(),
-	      "tags": $("#tags").val(),
-	      "shortdescription": $("#shortdescription").val(),
-	      "longdescription": $("#longdescription").val(),
+	      "id":$("#jd-id").val(),
+	      "title": $("#jd-title").val(),
+	      "tags": $("#jd-tags").val(),
+	      "shortdescription": $("#jd-shortdescription").val(),
+	      "longdescription": $("#jd-longdescription").val(),
 	      "category": category
+	  }
+	  if(obj.id.length === 0){
+	      obj.id = Math.round(Math.random()*100000000)%(new Date()).getTime();
 	  }
 	  if(obj.title.length==0){
 	      alert("Title cannot be empty");
@@ -355,14 +354,16 @@
 
       function updatehiring(){
 	  var category = currentPage.split(".")[1];
-	  var id = Math.round(Math.random()*100000000)%(new Date()).getTime();
 	  var obj = {
-	      "id":id,
+	      "id":$("#candidate-id").val(),
 	      "name": $("#candidate-name").val(),
 	      "tags": $("#candidate-tags").val(),
 	      "email": $("#candidate-email").val(),
 	      "resume": $("#candidate-resume").val(),
 	      "category": category
+	  }
+	  if(obj.id === ""){
+	      obj.id = Math.round(Math.random()*100000000)%(new Date()).getTime();
 	  }
 	  if(obj.name.length==0){
 	      alert("Title cannot be empty");
