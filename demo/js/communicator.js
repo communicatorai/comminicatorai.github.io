@@ -374,7 +374,8 @@ ChatRenderer.prototype.renderInput = function(options,msg){
 	    initFileBox();
 	}else if(options && options.length>0){
 		$(".optionBox").html('');
-		var list = document.createElement('div');
+	    var list = document.createElement('div');
+	    list.style = "float:left";
 		options.map((option)=>{
 			return this.getOption(option);
 		}).forEach((ch)=>{
