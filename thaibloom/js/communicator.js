@@ -43,7 +43,10 @@ J.prototype.click = function(){}
 J.ajax = function(option){}
 
 function CommService(){
-    this.rootURL = "https://communicatorai.herokuapp.com";
+    this.rootURL = "http://localhost:3001";
+    if(window.origin === "http://communicator.ai"){
+	this.rootURL = "https://communicatorai.herokuapp.com";
+    }
 	this.baseURL = this.rootURL + "/bot/4";
 	this.state = {
 		"action": "start"
