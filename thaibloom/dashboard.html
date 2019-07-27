@@ -1,0 +1,398 @@
+<html>
+  <head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <link rel="stylesheet" href="css/dashboard.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+<script src="https://unpkg.com/react@16/umd/react.development.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin></script>
+  <script src="js/table.js"></script>
+
+  </head>
+  <body>
+
+<div class="sidebar">
+  <a class="jd" onclick="navigate('jd.product')">Job Descriptions</a>
+  <a class="hiring" onclick="navigate('hiring.leads')">Hiring Funnel</a>
+  <a class="users" onclick="navigate('users')">Users</a>
+</div>
+
+<!--
+<div class="content hiring-table">
+    <div class="tabbable">
+  <ul class="nav nav-tabs wizard">
+    <li class="leads"><a onclick="set('hiring.leads')" data-toggle="tab" aria-expanded="false"><span class="nmbr leadscount">10,00,000</span>Leads</a></li>
+    <li class="prescreen"><a onclick="set('hiring.prescreen')" data-toggle="tab" aria-expanded="false"><span class="nmbr prescreencount">2</span>Prescreen</a></li>
+    <li class="shortlisted"><a onclick="set('hiring.shortlisted')" data-toggle="tab" aria-expanded="false"><span class="nmbr shortlistedcount">3</span>Shortlisted</a></li>
+    <li class="interview"><a onclick="set('hiring.interview')" data-toggle="tab" aria-expanded="false"><span class="nmbr interviewcount">4</span>Interview</a></li>
+    <li class="closed"><a onclick="set('hiring.closed')" data-toggle="tab" aria-expanded="true"><span class="nmbr closedcount">5</span>Closed</a></li>
+
+  </ul>
+    </div>
+
+    <div class="container-fluid">
+<table class="table">
+  <thead class="hiring-table-head">
+  </thead>
+  <tbody class="hiring-table-list">
+  </tbody>
+</table>
+</div>
+
+</div>
+
+<div class="content jd-table">
+    <div class="tabbable">
+  <ul class="nav nav-tabs wizard">
+    <li class="product"><a onclick="set('jd.product')" data-toggle="tab" aria-expanded="false"><span class="nmbr productcount">10,00,000</span>Product</a></li>
+    <li class="design"><a onclick="set('jd.design')" data-toggle="tab" aria-expanded="false"><span class="nmbr designcount">2</span>Design</a></li>
+    <li class="customersuccess"><a onclick="set('jd.customersuccess')" data-toggle="tab" aria-expanded="false"><span class="nmbr customersuccesscount">3</span>Shortlisted</a></li>
+    <li class="sales"><a onclick="set('jd.sales')" data-toggle="tab" aria-expanded="false"><span class="nmbr salescount">4</span>Sales</a></li>
+    <li class="marketing"><a onclick="set('jd.marketing')" data-toggle="tab" aria-expanded="true"><span class="nmbr marketingcount">5</span>Marketing</a></li>
+    <li class="engineering"><a onclick="set('jd.engineering')" data-toggle="tab" aria-expanded="true"><span class="nmbr engineeringcount">5</span>Engineering</a></li>
+    <li class="businessoperations"><a onclick="set('jd.businessoperations')" data-toggle="tab" aria-expanded="true"><span class="nmbr businessoperationscount">5</span>Business Operations</a></li>
+  </ul>
+    </div>
+<!-- This is starting for list
+<div class="container-fluid">
+<table class="table">
+  <thead class="jd-table-head">
+  </thead>
+  <tbody class="jd-table-list">
+  </tbody>
+</table>
+</div>
+-->
+
+
+
+<!-- This is ending of list -->
+
+    </div>
+
+<div class="modal fade" id="modaljdForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add/Edit JD</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <input type="hidden" id="jd-id" value=""></input>
+      <input type="hidden" id="jd-tags" value=""></input>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form34">Title</label>
+          <input type="text" id="jd-title" class="form-control validate">
+        </div>
+
+        <div class="md-form mb-5">
+          <i class="fas fa-tag prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form32">Short Description</label>
+          <input type="text" id="jd-shortdescription" class="form-control validate">
+        </div>
+
+        <div class="md-form">
+          <i class="fas fa-pencil prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form8">Long Description</label>
+          <textarea type="text" id="jd-longdescription" class="md-textarea form-control" rows="4"></textarea>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-unique" onclick="updatejd()">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalhiringForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Add/Edit Candidate</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+            <input type="hidden" id="candidate-id" value=""></input>
+      <input type="hidden" id="candidate-tags" value=""></input>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form34">Full name</label>
+          <input type="text" id="candidate-name" class="form-control validate">
+        </div>
+
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form29">Candidate email</label>
+          <input type="email" id="candidate-email" class="form-control validate">
+        </div>
+
+        <div class="md-form mb-5">
+          <i class="fas fa-tag prefix grey-text"></i>
+          <label data-error="wrong" data-success="right" for="form32">Resume</label>
+          <input type="text" id="candidate-resume" class="form-control validate">
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-unique" onclick="updatehiring()">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="modalusersForm" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+  aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header text-center">
+        <h4 class="modal-title w-100 font-weight-bold">Write to us</h4>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body mx-3">
+        <div class="md-form mb-5">
+          <i class="fas fa-user prefix grey-text"></i>
+          <input type="text" id="form34" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form34">Your name</label>
+        </div>
+
+        <div class="md-form mb-5">
+          <i class="fas fa-envelope prefix grey-text"></i>
+          <input type="email" id="form29" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form29">Your email</label>
+        </div>
+
+        <div class="md-form mb-5">
+          <i class="fas fa-tag prefix grey-text"></i>
+          <input type="text" id="form32" class="form-control validate">
+          <label data-error="wrong" data-success="right" for="form32">Subject</label>
+        </div>
+
+        <div class="md-form">
+          <i class="fas fa-pencil prefix grey-text"></i>
+          <textarea type="text" id="form8" class="md-textarea form-control" rows="4"></textarea>
+          <label data-error="wrong" data-success="right" for="form8">Your message</label>
+        </div>
+
+      </div>
+      <div class="modal-footer d-flex justify-content-center">
+        <button class="btn btn-unique">Send <i class="fas fa-paper-plane-o ml-1"></i></button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="js/hiring-admin.js"></script>
+    <script src="js/hiring-admin-service.js"></script>
+    <script>
+      var router = {};
+      var fullLists = {};
+      var currentPage = "";
+
+      function activate(className){
+	  if(!className){return;}
+	  var el = document.getElementsByClassName(className);
+	  if(el && el.length>0){
+	      el[0].classList.add("active");
+	  }
+      }
+      function deactive(className){
+	  if(!className){return;}
+	  var el = document.getElementsByClassName(className);
+	  if(el && el.length>0){
+	      el[0].classList.remove("active");
+	  }
+      }
+
+	  var menus = {
+	      "hiring": ["edit","delete","promote"],
+	      "jd": ["edit","delete"],
+	      "users": ["edit","delete"],
+	  }
+
+
+      function updateFunnelStats(){
+	  var all = ["leads","prescreen","shortlisted","interview","closed"];
+	  var counter = all.map((key)=>{
+	      return fullLists["hiring"].data.filter((can)=>{
+		  return can.tags.indexOf(key)>=0;
+	      }).length;
+	  });
+	  router["hiring"].updateStats(counter);
+      }
+      function updateEntryStats(){
+	  var all = ["product","design","customersuccess","sales","marketing","engineering","businessoperations"];
+	  var counter = all.map((key)=>{
+	      return fullLists["jd"].data.filter((job)=>{
+		  return job.tags.indexOf(key)>=0;
+	      }).length;
+	  })
+	  all.map((a)=>{
+	      return a+"count";
+	  }).map((a)=>{
+	      return document.getElementsByClassName(a);
+	  }).filter((a)=>{
+	      return a.length>0;
+	  }).forEach((a,index)=>{
+	      a[0].innerText = counter[index];
+	  });
+      }
+
+      function navigate(route){
+	  currentPage = route;
+	  var spl = route.split(".");
+	  // hide all pages
+	  var pages = Object.keys(router);
+	  pages.map((p)=>{
+	      return router[p];
+	  }).forEach((p)=>{
+              p.hide();
+	  });
+	  if(spl.length == 2){
+	      var page = spl[0];
+	      var r = spl[1];
+	      router[page].nav(r);
+	      router[page].update(hiringService);
+	  }
+      }
+
+      	  var all_json = {
+	      "jd": ["product","design","customersuccess","sales","marketing","engineering","businessoperations"],
+	      "hiring": ["leads","prescreen","shortlisted","interview","closed"],
+	      "users": []
+	  }
+      function main(){
+	  var page_names = Object.keys(all_json);
+	  page_names.forEach((page)=>{
+	      router[page] = new Page(page,all_json[page],menus[page]);
+	      router[page].render();
+	      router[page].hide();
+	  });
+	  navigate('jd.product');
+	  window.hiringd = new hiringService();
+	  window.hiringd.start();
+      }
+
+      window.onload = main;
+
+      function raise(event,id){
+	  var hs = new hiringService();
+	  var key = currentPage.split(".")[0];
+	  var category = key;
+	  if(event ==="edit"){
+	      var obj = hs._getOne(key,id);
+	      var keys = Object.keys(obj);
+	      keys.forEach((a)=>{
+		  $("#"+key+"-"+a).val(obj[a]);
+	      });
+	      //	      hs._edit(key,obj)
+	      	  $("#modal"+key+"Form").modal('toggle');
+	  }else if(event === "delete"){
+	      hs._delete(key,hs._getOne(key,id));
+
+	  }else if(event === "promote"){
+	      var candidate = hs._getOne("hiring",id);
+	      var nIndex = all_json["hiring"].indexOf(category)+1;
+	      if(nIndex > 4){
+		  alert(" This candidature is closed");
+		  return;
+	      }
+	      var nextCategory = all_json["hiring"][nIndex];
+	      nTags = candidate.tags.split(",").filter((key)=>{
+		  return key !== category;
+	      });
+	      nTags.push(nextCategory);
+	      candidate.tags = nTags.join(",");
+	      candidate.category = nextCategory;
+	      hs._edit("hiring",candidate);
+	  }
+	  navigate(currentPage);
+      }
+
+      function updatejd(){
+	  var category = currentPage.split(".")[1];
+	  var obj = {
+	      "id":$("#jd-id").val(),
+	      "title": $("#jd-title").val(),
+	      "tags": $("#jd-tags").val(),
+	      "shortdescription": $("#jd-shortdescription").val(),
+	      "longdescription": $("#jd-longdescription").val(),
+	      "category": category
+	  }
+	  if(obj.id.length === 0){
+	      obj.id = Math.round(Math.random()*100000000)%(new Date()).getTime();
+	  }
+	  if(obj.title.length==0){
+	      alert("Title cannot be empty");
+	      return;
+	  }
+	  if(obj.tags.length === 0){
+	      obj.tags = category;
+	  }else{
+	      obj.tags = obj.tags+","+category;
+	  }
+
+	  if(obj.shortdescription.length === 0){
+	      alert("Short description cannot be empty");
+	      return;
+	  }
+	  if(obj.longdescription.length === 0){
+	      alert("Long description cannot be empty");
+	      return;
+	  }
+	  new hiringService()._edit("jd",obj);
+	  $("#modaljdForm").modal('toggle');
+	  navigate(currentPage);
+      }
+
+      function updatehiring(){
+	  var category = currentPage.split(".")[1];
+	  var obj = {
+	      "id":$("#candidate-id").val(),
+	      "name": $("#candidate-name").val(),
+	      "tags": $("#candidate-tags").val(),
+	      "email": $("#candidate-email").val(),
+	      "resume": $("#candidate-resume").val(),
+	      "category": category
+	  }
+	  if(obj.id === ""){
+	      obj.id = Math.round(Math.random()*100000000)%(new Date()).getTime();
+	  }
+	  if(obj.name.length==0){
+	      alert("Title cannot be empty");
+	      return;
+	  }
+	  if(obj.tags.length === 0){
+	      obj.tags = category;
+	  }else{
+	      obj.tags = obj.tags+","+category;
+	  }
+
+	  if(obj.email.length === 0){
+	      alert("Email cannot be empty");
+	      return;
+	  }
+	  if(obj.resume.length === 0){
+	      alert("Resume URL cannot be empty");
+	      return;
+	  }
+	  new hiringService()._edit("hiring",obj);
+	  $("#modalhiringForm").modal('toggle');
+	  navigate(currentPage);
+      }
+
+      function add(tag){
+	  console.log(tag);
+      }
+  </script>
+  </body>
+  </html>

@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/animate.min.css">
+    <script src="js/jquery.min.js"></script>
+  </head>
+  <body>
+
+<!--    <div class="communicatorChatBox shadow">
+      <div class="communicatorAgent">
+        <div class="AgentIcon">
+          <svg xmlns="http://www.w3.org/2000/svg" width="51" height="51"><g data-name="Group 4"><g data-name="Group 3" transform="translate(-18.5 -45.5)" fill="#2680eb"><circle data-name="Ellipse 2" cx="25.5" cy="25.5" r="25.5" transform="translate(18.5 45.5)"/><path data-name="Path 2" d="M51.544 90.519l14.173 4.872a2.233 2.233 0 0 0 2.59-3.092l-6.233-14.138a1.97 1.97 0 0 0-3.364-.425l-7.94 9.265a2.2 2.2 0 0 0 .774 3.518z"/></g><path data-name="Path 1" d="M37.995 28.998a13.3 13.3 0 0 1-25.5 0" fill="none" stroke="#fff" stroke-linecap="round" stroke-miterlimit="10" stroke-width="5"/></g></svg>
+          <div class="chatClose">
+              <svg xmlns="http://www.w3.org/2000/svg" width="19" height="11"><path data-name="Path 3" stroke="#707070" d="M1.5 1.5l8 8 8-8" fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="3" opacity=".27"/></svg>
+          </div>
+        </div>
+
+        <div class="init card fadeIn animated bounce delay-1s shadow">
+          <p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Jobeye AI <br>What sort of domain do you have experience in ?</p>
+        </div>
+
+        <div class="init agentInput fadeIn animated bounce 800ms shadow">
+          <input type="text" name="" value="" placeholder="Type Message here">
+          <button type="button" name="button" >Send Message</button>
+        </div>
+      </div>
+
+      <div class="chatBody fadeIn animated bounce delay-1s ">
+        <div class="aiReply">
+          <span class="chatTime">Jobeye Agent | 1:13 PM</span>
+          <p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Jobeye AI <br>What sort of domain do you have experience in ?</p>
+        </div>
+        <div class="userReply">
+          <span class="chatTime">You</span>
+          <p >To be honest I am not sure</p>
+        </div>
+        <div class="aiReply">
+          <span class="chatTime">Jobeye Agent | 1:13 PM</span>
+          <p ><strong style="padding-bottom:4px" >Hey Jobseeker</strong> 🖐, I am Jobeye AI <br>What sort of domain do you have experience in ?</p>
+        </div>
+        <div class="userReply">
+          <span class="chatTime">You</span>
+          <p >To be honest I am not sure</p>
+        </div>
+
+      </div>
+      <div class="branding fadeIn animated bounce delay-1s">⚡️ by Communicator AI</div>
+    </div>
+
+-->
+<div class="communicator-chat"></div>
+
+<script src="js/communicator1.js"></script>
+  <!--
+    <script type="text/javascript">
+    $(function() {
+      $('.communicatorChatBox').click(function() {
+        $('.communicatorAgent').addClass('open');
+      });
+      $('.agentInput').click(function() {
+        $('.communicatorChatBox').addClass('expand');
+        $('.agentInput').removeClass('shadow');
+        $('.card').addClass('chat');
+        $('.communicatorAgent').addClass('expand');
+        $('.chatBody').css('display','block');
+        $('.card').css('display','none');
+        $('.chatClose').css('display','block');
+      });
+
+
+
+    })
+    </script>
+  -->
+  </body>
+
+</html>

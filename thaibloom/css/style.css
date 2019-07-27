@@ -1,0 +1,649 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+body {
+  background: #eee;
+  font-family: 'Roboto', sans-serif;
+}
+.dbg{
+  border:1px solid red
+}
+.dbg2{
+  border:1px solid green
+}
+
+@media only screen and (min-device-width : 320px) and (max-device-width : 480px) {
+
+    body{
+	margin: 0px;
+	padding: 0px;
+	font-size: 1em;
+    }
+    .communicator-chat{
+	width: 100%;
+	height: 100%;
+	margin:0px;
+	padding: 0px;
+    }
+    .AgentIconNew {
+	position: absolute;
+	bottom: 30px;
+	right: 30px;
+	border-radius: 50px;
+	cursor: pointer;
+	z-index: 1;
+    }
+
+    .AgentIconNew.open{
+	display: none !important;
+    }
+    .AgentIconSVG{
+	width: 8em;
+	height: 8em;
+    }
+
+    .previewBot {
+	position: absolute;
+	width: 100%;
+	height: 80%;
+	padding: 2%;
+	border-radius: 12px;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+    }
+
+    .senderBox{
+	position: fixed;
+	bottom: 0;
+	width: 100%;
+	height: fit-content;
+	padding: 2%;
+	border-radius: 12px;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+    }
+
+    .sendingBox{
+	font-size: 3rem;
+    }
+
+    .messageBox{
+	padding-top: 1em;
+	padding-bottom: 1em;
+	font-size: 3em;
+	width: 70%;
+	border-style: none;
+    }
+
+    .messageBox:focus{
+	outline: none;
+    }
+
+    .chatBox{
+	position:fixed;
+	min-height: 85%;
+	border-radius: 5px;
+	width: 100%;
+	height: 60%;
+	padding: 0px;
+	margin: 0px;
+	background-color: #fff;
+	display:none;
+	overflow-x: auto;
+	border-top:1px solid #F1F1F1;
+	border-bottom:1px solid #F1F1F1;
+	z-index: -1;
+    }
+
+    .chatHeader{
+	width: 100%;
+	height: 10%;
+	background-color: #4e4ce4;
+	position: fixed;
+    }
+
+    .closeHeaderParent{
+	position:relative;
+	left: 90%;
+	top:25%;
+	width: 8em;
+	height: 8em;
+    }
+
+    .chatBody{
+	margin-top: 25%;
+	padding-left: 25px;
+	padding-right: 25px;
+	padding-bottom: 25%;
+    }
+
+    .optiontag {
+	margin: 1px;
+	float:left;
+	border-radius: 20px;
+	background-color: #4e4ce4;
+	width: fit-content;
+	padding: 6px;
+	color: #fff;
+	border-bottom: 1px solid white;
+	font-size: 3em;
+    }
+
+    li {
+	font-size: 3em;
+	list-style: none;
+    }
+
+    .communicatorAgent {
+  position: fixed;
+  transition: transform 1s;
+  cursor: pointer;
+}
+.communicatorAgent.open {
+    width: 100%;
+    height: 100%;
+    transition: transform 0.5s;
+    background-color: #fff;
+}
+.AgentIcon {
+  border-radius: 50px;
+  width: 120px;
+  height:120px;
+  cursor: pointer;
+  transition: transform 0.5s;
+  z-index: 1
+}
+
+.communicatorAgent.open .AgentIcon {
+  transition: transform 1s;
+  transform: translateY(-148px);
+  margin-left: 10px;
+}
+
+.communicatorAgent.expand .AgentIcon{
+  transition: transform 1s;
+  transform: translateY(-730px);
+}
+
+.communicatorAgent.open .card {
+  transition: transform 1s;
+  transform: translateY(-440px) translateX(307px);
+  width: 100%;
+  margin-left: -10px;
+  opacity: 1;
+  z-index: -1;
+  visibility: visible;
+}
+.communicatorAgent.open .agentInput {
+  transition: transform 1s;
+  transform: translateY(0px);
+  width: 338px;
+  height: 55px;
+  margin-left: -10px;
+  cursor: text;
+  background: #fff;
+  border-radius: 8px;
+  display: block;
+}
+.agentInput{
+  display: none
+}
+.communicatorAgent.open .card p{
+  transition-delay: 0.5s;
+  opacity: 1;
+  transition: transform 0.5s;
+}
+
+.communicatorChatBox.expand{
+  position: absolute;
+  display: block;
+  transition-property: height;
+  transition-duration: 0.3s;
+  opacity: 1;
+}
+
+.card{
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+}
+.init{
+  position:absolute;
+  width: 0px;
+  height: 0px;
+  right:auto;
+  bottom: 0px;
+  transition: transform 0.5s;
+}
+
+.card p{
+  margin-top: 18px;
+  padding: 10px 20px;
+
+}
+.communicatorChatBox{
+  bottom: 0;
+  height: 0;
+  width: 100%;
+  right: 100%;
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+
+}
+
+/*  */
+.rad{
+  border: 2px solid #166cc1;
+  border-radius: 50%;
+}
+.fadeIn{
+  transition-property: opacity;
+  transition-duration: 0.3s;
+}
+
+/*  */
+
+.communicatorChatBox input{
+  border: none;
+  padding: 5px;
+  margin: 15px;
+  width:155px
+}
+.communicatorChatBox p{
+  line-height: 22px
+}
+.chatClose{
+  width: 22px;
+  height: 22px;
+  display: block;
+  position: absolute;
+  right: -250px;
+  top: 10px;
+  display: none
+}
+/*  */
+.shadow{
+  -webkit-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+  -moz-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+  box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+}
+.communicatorChatBox textarea:focus, .communicatorChatBox input:focus,.communicatorChatBox button{
+  outline: none;
+}
+
+button{
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  color: #166cc1;
+  font-size: 2em;
+}
+.communicatorChatBox .branding{
+  bottom: 8px;
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: #989696;
+}
+
+.chat{
+  box-shadow: none
+}
+.chatBodyOld{
+  padding: 20px;
+  display:none;
+  height: 500px;
+  overflow-x: auto;
+  top: 94px;
+  position: absolute;
+  border-top:1px solid #F1F1F1;
+  border-bottom:1px solid #F1F1F1;
+  z-index: 5 !important
+}
+.chatTime{
+  font-size: 2em;
+  color:#7070707d;
+  width: 100%;
+  clear: both;
+}
+.userReply p{
+    font-size: 2em;
+  background: #2680eb;
+  color: #fff;
+  text-align: right;
+  margin-top: 4px;
+  padding: 40px 60px;
+  width: fit-content;
+  word-break: break-all;
+  border-radius: 22px 6px 22px 22px;
+  float: right;
+}
+.userReply{
+  display: flow-root;
+}
+.userReply span{
+  float: right;
+  padding-right: 10px;
+  text-align: right;
+}
+.aiReply p{
+  margin-top:4px;
+  background: aliceblue;
+  padding: 40px 60px;
+  width:fit-content;
+  border-radius: 6px 22px 22px 22px;
+  font-size: 2em;
+}
+.aiReply span{
+  padding-left: 10px
+}
+
+}
+
+ /********/
+@media only screen and (min-device-width: 480px) {
+    .communicator-chat{
+	position: absolute;
+	    bottom: 100px;
+	right: 40px;
+    }
+    .AgentIconNew {
+	position: absolute;
+	bottom: 30px;
+	right: 40px;
+	border-radius: 50px;
+	cursor: pointer;
+	z-index: 1;
+    }
+    .AgentIconSVG{
+	width: 4em;
+	height: 4em;
+    }
+    .previewBot {
+	width: 360px;
+	padding: 14px;
+	border-radius: 12px;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+	margin-bottom: 10px;
+    }
+
+    .senderBox{
+	width: 370px;
+	padding: 10px;
+	border-radius: 12px;
+	background-color: #fff;
+	box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+	z-index: 12;
+    }
+
+    .messageBox{
+	width: 58%;
+	border-style: none;
+    }
+    .messageBox:focus{
+	outline: none;
+    }
+    .chatBody{
+	padding-left: 20px;
+	padding-right: 20px;
+	padding-top: 110px;
+    }
+
+    .closeHeaderParent{
+	position:relative;
+	left: 85%;
+	width: 4em;
+	height: 4em;
+    }
+
+    .optiontag {
+	margin: 1px;
+	float:left;
+	border-radius: 20px;
+	background-color: #4e4ce4;
+	width: fit-content;
+	padding: 6px;
+	color: #fff;
+	border-bottom: 1px solid white;
+    }
+
+    .communicatorAgent {
+  position: fixed;
+  bottom: 30px;
+  right: 40px;
+  transition: transform 1s;
+  cursor: pointer;
+}
+.communicatorAgent.open {
+  transition: transform 0.5s;
+  transform: translateX(-260px);
+}
+.AgentIcon {
+  border-radius: 50px;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  transition: transform 0.5s;
+  z-index: 1
+}
+.communicatorAgent.open .AgentIcon {
+  transition: transform 1s;
+  transform: translateY(-148px);
+  margin-left: 10px;
+}
+
+.communicatorAgent.expand .AgentIcon{
+  transition: transform 1s;
+  transform: translateY(-730px);
+}
+
+.communicatorAgent.open .card {
+  transition: transform 1s;
+  transform: translateY(-62px);
+  width: 320px;
+  height: 99px;
+  margin-left: -10px;
+  opacity: 1;
+  z-index: -1;
+  visibility: visible;
+  position: absolute;
+  bottom:100px;
+  right: -260px;
+}
+.communicatorAgent.open .agentInput {
+  transition: transform 1s;
+  transform: translateY(0px);
+  width: 338px;
+  height: 55px;
+  margin-left: -10px;
+  cursor: text;
+  background: #fff;
+  border-radius: 8px;
+  display: block;
+  position: absolute;
+  bottom: 100px;
+  right: -260px;
+}
+.agentInput{
+  display: none
+}
+.communicatorAgent.open .card p{
+  transition-delay: 0.5s;
+  opacity: 1;
+  transition: transform 0.5s;
+}
+
+.communicatorChatBox.expand{
+  position: absolute;
+  width: 350px;
+  height: 80vh;
+  display: block;
+  right: 35px;
+  transition-property: height;
+  transition-duration: 0.3s;
+  opacity: 1;
+  min-height: 500px;
+  bottom: 100px;
+}
+
+.card{
+  background: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  opacity: 0;
+  visibility: hidden;
+}
+.init{
+  position:absolute;
+  width: 0px;
+  height: 0px;
+  right:auto;
+  bottom: 0px;
+  transition: transform 0.5s;
+}
+
+.card p{
+  margin-top: 18px;
+  padding: 10px 20px;
+
+}
+.communicatorChatBox{
+  bottom: 0;
+  height: 0;
+  width: 350px;
+  right: 40px;
+  position: absolute;
+  z-index: -1;
+  background: #fff;
+
+}
+
+/*  */
+.rad{
+  border: 2px solid #166cc1;
+  border-radius: 50%;
+}
+.fadeIn{
+  transition-property: opacity;
+  transition-duration: 0.3s;
+}
+
+/*  */
+
+.communicatorChatBox input{
+  border: none;
+  padding: 5px;
+  margin: 15px;
+  width:155px
+}
+.communicatorChatBox p{
+  line-height: 22px
+}
+.chatClose{
+  width: 22px;
+  height: 22px;
+  display: block;
+  position: absolute;
+  right: -250px;
+  top: 10px;
+  display: none
+}
+/*  */
+.shadow{
+  -webkit-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+  -moz-box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+  box-shadow: 0px 0px 10px -3px rgba(0,0,0,0.47);
+}
+.communicatorChatBox textarea:focus, .communicatorChatBox input:focus,.communicatorChatBox button{
+  outline: none;
+}
+
+button{
+  background: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  font-weight: bold;
+  color: #166cc1;
+  font-size: 14px;
+}
+.communicatorChatBox .branding{
+  bottom: 8px;
+  position: absolute;
+  right: 10px;
+  font-size: 12px;
+  color: #989696;
+}
+
+.communicatorChatBox {
+  border-radius: 8px 8px 0 0;
+  overflow-y: hidden;
+}
+
+.chat{
+  box-shadow: none
+}
+.chatBox{
+    padding-bottom: 10px;
+  display:none;
+  width: 390px;
+  height: 500px;
+  overflow-x: auto;
+  border-bottom:1px solid #F1F1F1;
+  z-index: 5 !important;
+  background-color: #fff;
+  border-radius: 12px;
+  margin-bottom: 10px;
+}
+.chatHeader{
+    	width: 390px;
+	height: 80px;
+	background-color: #4e4ce4;
+	text-align: right;
+	position: fixed;
+	border-radius: 5px 5px 0 0;
+    }
+.chatTime{
+  font-size: 14px;
+  color:#7070707d;
+  width: 100%;
+  clear: both;
+}
+.userReply p{
+  background: #2680eb;
+  color: #fff;
+  text-align: right;
+  margin-top: 4px;
+  padding: 10px 15px;
+  width: fit-content;
+  word-break: break-all;
+  border-radius: 22px 6px 22px 22px;
+  float: right;
+}
+.userReply{
+  display: flow-root;
+}
+.userReply span{
+  float: right;
+  padding-right: 10px;
+  text-align: right;
+}
+.aiReply p{
+  margin-top:4px;
+  background: aliceblue;
+  padding: 10px 15px;
+  width:fit-content;
+  border-radius: 6px 22px 22px 22px;
+}
+.aiReply span{
+  padding-left: 10px
+}
+}
