@@ -283,7 +283,7 @@ ChatRenderer.prototype.appendUserText = function(chat){
 	}
 }
 ChatRenderer.prototype.appendChat = function(msg){
-	if(msg.author.name === "Jay"){
+	if(msg.author.name === "Alex"){
 		this.appendBotText(msg);
 	}else{
 		this.appendUserText(msg);
