@@ -44,7 +44,7 @@ J.ajax = function(option){}
 
 function CommService(){
     this.rootURL = "https://communicatorai.herokuapp.com";
-	this.baseURL = this.rootURL + "/bot/3";
+	this.baseURL = this.rootURL + "/bot/4";
 	this.state = {
 		"action": "start"
 	};
