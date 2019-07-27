@@ -43,7 +43,7 @@ J.prototype.click = function(){}
 J.ajax = function(option){}
 
 function CommService(){
-    this.rootURL = "https://communicatorai.herokuapp.com";
+    this.rootURL = "http://localhost:3001";
 	this.baseURL = this.rootURL + "/bot/4";
 	this.state = {
 		"action": "start"
@@ -151,7 +151,7 @@ var mediumBotHtml ='<div class="init card fadeIn animated bounce delay-1s shadow
     +'</div>';
 
 var previewBot ='<div class="initNew cardNew fadeInNew animatedNew bounceNew delay-1s-new shadowNew">'
-          + '<p ><strong style="padding-bottom:4px" >Hi there</strong> 🖐, I am Communicator AI <br>I will be assisting you to get started with application process</p>'
+          + '<p ><strong style="padding-bottom:4px" >Hi there</strong> 🖐, This is Alex from Thaibloom <br>I can instantly help you to find the right position at Thaibloom. Please reply Y to continue</p>'
         	+'</div>'
 
 var sender = '<input class="messageBox" type="text" name="" value="" placeholder="Write a reply">'
