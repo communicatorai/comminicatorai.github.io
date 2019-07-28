@@ -91,8 +91,10 @@ CommService.prototype.send = function(msg,cb){
 	return;
     }
 	var data ={
-		"input": msg,
-		"state" :this.state
+	    "input": msg,
+	    "state" : {
+		"identifier": this.state.identifier
+	    }
 	};
     this._send(data,cb);
 }
@@ -313,7 +315,7 @@ ChatRenderer.prototype.showSending = function(){
 	$(".optionBox").hide();
     }
     $(".sendBtn").hide();
-    $(".sendingBox").show();
+    $(".sendingBox").show();$(".sendingBox").css({"padding":"2%","float":"left"});
     this.showTyping();
 //    window.communicator.chatbox.showTyping();
 }

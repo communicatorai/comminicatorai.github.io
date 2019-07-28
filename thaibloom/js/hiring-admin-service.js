@@ -1,14 +1,17 @@
 var hiringService = function(){
-    this.rootURL = "http://communicatorai.herokuapp.com";
+    this.rootURL = "http://localhost:3001";
+    if(window.origin === "http://communicator.ai"){
+	this.rootURL = "http://communicatorai.herokuapp.com";
+    }
     this.lastUpdated = null;
     this.cron = null;
     this.syncInProgress = false;
 
     this._call = function(){
 	this.syncInProgress = true;
-	var baseURL = this.rootURL + '/leads';
+	var baseURL = this.rootURL + '/candidates';
 	var key = "hiring";
-	var data_json = this._get(key);
+	var data_json = {};//this._get(key);
 	var settings = {
 		"async": true,
   		"url": baseURL,
@@ -21,16 +24,8 @@ var hiringService = function(){
 	var self = this;
 	$.ajax(settings).done(function(e){
 	    var uData = e.data.map((d)=>{
-		var spl = d.split(",");
-		return {
-		    "id":"",
-		    "name":spl[1],
-		    "tags":spl[7]+","+spl[8],
-		    "email":spl[2],
-		    "resume":spl[9],
-		    "category":spl[7]
-		};
-	    });
+		return JSON.parse(d);
+	    })
 	    localStorage.setItem(key,JSON.stringify(uData));
 	});
 	// Call the API
@@ -77,7 +72,7 @@ var hiringService = function(){
 
 	this._get = function(key){
 	    var l = localStorage.getItem(key);
-	    if(l==null){ return [];}
+	    if(l==null || l === ""){ return [];}
 	    return JSON.parse(l);
 	}
 

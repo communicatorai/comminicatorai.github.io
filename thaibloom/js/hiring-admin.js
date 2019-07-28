@@ -102,9 +102,11 @@ Page.prototype.updateTable = function(data){
 	return;
     }
     var fil = this.activeClass;
-    tablebody.innerHTML = data.filter((row,index)=>{
-	    return row.tags.indexOf(fil)>=0;
-	}).map((row,index)=>{
+    tablebody.innerHTML = data
+	//.filter((row,index)=>{
+	//    return row.tags.indexOf(fil)>=0;
+//})
+.map((row,index)=>{
 	    return self.getRow(row.id,row);
 	}).join("");
     tablehead.innerHTML = this.getHeaderRow(headers);
