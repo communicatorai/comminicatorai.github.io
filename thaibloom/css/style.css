@@ -63,6 +63,8 @@ body {
 
     .sendingBox{
 	font-size: 3rem;
+	padding: 2%;
+	float: left;
     }
 
     .messageBox{
@@ -627,6 +629,7 @@ button{
   word-break: break-all;
   border-radius: 22px 6px 22px 22px;
   float: right;
+  word-break: break-word;
 }
 .userReply{
   display: flow-root;

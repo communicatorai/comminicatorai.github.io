@@ -160,6 +160,10 @@ var mediumBotHtml ='<div class="init card fadeIn animated bounce delay-1s shadow
 
 var previewBot ='<div class="initNew cardNew fadeInNew animatedNew bounceNew delay-1s-new shadowNew">'
           + '<p ><strong style="padding-bottom:4px" >Hi there</strong> 🖐, This is Alex from Thaibloom <br>I can instantly help you to find the right position at Thaibloom. Please reply Y to continue</p>'
+    +'</div>'
+
+var reviewPreviewBot ='<div class="initNew cardNew fadeInNew animatedNew bounceNew delay-1s-new shadowNew">'
+          + '<p ><strong style="padding-bottom:4px" >Hi there</strong> 🖐, This is Alex from Thaibloom <br>Just checking into see how things are going. Whenever you are available. Please reply Y to continue</p>'
         	+'</div>'
 
 var sender = '<input class="messageBox" type="text" name="" value="" placeholder="Write a reply">'
@@ -573,7 +577,11 @@ Preview.prototype.toggle = function(){
 Preview.prototype.render = function(){
     var aIcon = document.createElement('div');
     aIcon.className = "previewBot";
-    aIcon.innerHTML = previewBot;
+    if(window.location.href.indexOf("review.html")>=0){
+	aIcon.innerHTML = reviewPreviewBot;
+    }else{
+	aIcon.innerHTML = previewBot;
+    }
     document.getElementsByClassName('communicator-chat')[0].appendChild(aIcon);
 }
 
