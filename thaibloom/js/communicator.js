@@ -318,7 +318,8 @@ ChatRenderer.prototype.showSending = function(){
     }else{
 	$(".optionBox").hide();
     }
-    $(".sendBtn").hide();
+    $(".sendBtn").attr("disabled", true);
+//    $(".sendBtn").hide();
     $(".sendingBox").show();$(".sendingBox").css({"padding":"2%","float":"left"});
     this.showTyping();
 //    window.communicator.chatbox.showTyping();
@@ -330,7 +331,7 @@ ChatRenderer.prototype.hideSending = function(){
     }else{
 	$(".optionBox").show();
     }
-    $(".sendBtn").show();
+    $(".sendBtn").attr("disabled", false);
     $(".sendingBox").hide();
     this.hideTyping();
 //    window.communicator.chatbox.hideTyping();
