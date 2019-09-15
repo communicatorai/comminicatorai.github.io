@@ -47,7 +47,7 @@ function CommService(){
     if(window.origin === "http://communicator.ai"){
 	this.rootURL = "https://communicatorai.herokuapp.com";
     }
-    this.baseURL = this.rootURL + "/bot/4";
+    this.baseURL = this.rootURL + "/bot/6";
     if(window.location.href.indexOf("review.html")>=0){
 	this.baseURL = this.rootURL + "/bot/5";
     }
