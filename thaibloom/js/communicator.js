@@ -42,17 +42,55 @@ J.prototype.on = function(){}
 J.prototype.click = function(){}
 J.ajax = function(option){}
 
+function getWindowParams(){
+    var searchParams = window.location.search;
+    if(!searchParams || searchParams.length === 0){
+	return {};
+    }
+    var sanitizedSearchParams = searchParams.substr(1,searchParams.length);
+    var searchParamSplit = sanitizedSearchParams.split("&");
+    var params = {};
+    searchParamSplit.forEach((paramString)=>{
+	var pSplit = paramString.split("=");
+	params[pSplit[0]] = pSplit[1];
+    })
+    return params;
+}
+
+function getBotId(){
+    var windowParams = getWindowParams();
+    if(windowParams.hasOwnProperty("bot")){
+	return windowParams["bot"];
+    }
+    // TODO: Fail if this happens
+    return "4";
+}
+function getIdentifier(){
+    var windowParams = getWindowParams();
+    if(windowParams.hasOwnProperty("id")){
+	return windowParams["id"];
+    }
+    return null;
+}
+
 function CommService(){
     this.rootURL = "http://localhost:3001";
     if(window.origin === "http://communicator.ai"){
 	this.rootURL = "https://communicatorai.herokuapp.com";
     }
-    this.baseURL = this.rootURL + "/bot/6";
+    var botId = getBotId();
+    this.baseURL = this.rootURL + "/bot/"+botId;
     if(window.location.href.indexOf("review.html")>=0){
 	this.baseURL = this.rootURL + "/bot/5";
     }
+    var identifier = getIdentifier();
+    if(identifier){
+	console.log("Invalid identifier found. Expired?");
+	return;
+    }
 	this.state = {
-		"action": "start"
+	    "action": "start",
+	    "identifier": identifier
 	};
 	this.initialized = false;
 	this.onreceive = function(){console.log("New state received");}
