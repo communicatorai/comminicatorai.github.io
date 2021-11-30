@@ -24,8 +24,8 @@ body {
 	padding: 0px;
     }
     .AgentIconNew {
-	position: absolute;
-	bottom: 30px;
+	position: fixed;
+	bottom: 50px;
 	right: 30px;
 	border-radius: 50px;
 	cursor: pointer;
@@ -348,13 +348,14 @@ button{
  /********/
 @media only screen and (min-device-width: 480px) {
     .communicator-chat{
-	position: absolute;
-	    bottom: 100px;
+	position: fixed;
+	bottom: 74px;
 	right: 40px;
+	margin-left: 33.33%;
     }
     .AgentIconNew {
-	position: absolute;
-	bottom: 30px;
+	position: fixed;
+	bottom: 50px;
 	right: 40px;
 	border-radius: 50px;
 	cursor: pointer;
